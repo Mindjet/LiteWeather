@@ -1,15 +1,18 @@
-package io.github.mindjet.liteweather;
+package io.github.mindjet.liteweather.view;
 
 import org.jetbrains.annotations.NotNull;
 
+import io.github.mindjet.liteweather.R;
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding;
+import io.github.mindjet.liteweather.viewmodel.MainViewModel;
+import io.github.mindjet.livemvvm.view.BaseActivity;
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel;
 
 /**
  * Created by Mindjet on 2017/10/10.
  */
 
-public class MainActivity extends BaseBindingActivity<ActivityMainBinding, MainModel> {
+public class MainActivity extends BaseActivity<ActivityMainBinding> {
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;

@@ -1,4 +1,4 @@
-package io.github.mindjet.liteweather;
+package io.github.mindjet.liteweather.viewmodel;
 
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding;
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel;
@@ -8,4 +8,5 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel;
  */
 
 public class MainViewModel extends BaseViewModel<ActivityMainBinding> {
+
 }
