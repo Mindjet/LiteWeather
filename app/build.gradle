@@ -8,6 +8,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
     dataBinding.enabled true
+    kapt.generateStubs true
     defaultConfig {
         applicationId "io.github.mindjet.liteweather"
         minSdkVersion 21
@@ -19,7 +20,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField 'String', 'baseUrl', 'xxx'
+            buildConfigField 'String', 'baseUrl', '"xxx"'
         }
         release {
             minifyEnabled false
@@ -32,13 +33,23 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kapt "com.android.databinding:compiler:2.3.1"
+
+    //personal library
     implementation "com.github.Mindjet:LiveMVVM:v1.0.4"
+    implementation "com.github.Mindjet:RxKit:v1.0.0"
+//    implementation "com.github.Mindjet:AnkoUtil:1.0.0"
+
+    //lifecycle
     implementation "android.arch.lifecycle:runtime:1.0.0"
     implementation "android.arch.lifecycle:extensions:1.0.0-alpha9-1"
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha9-1"
+
+    //reactivex
     implementation 'io.reactivex:rxjava:1.2.6'
-    implementation "com.github.Mindjet:RxKit:v1.0.0"
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'

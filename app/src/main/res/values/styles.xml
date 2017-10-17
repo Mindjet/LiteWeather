@@ -12,7 +12,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.NoActionbar" parent="AppTheme.NoTitle">
+    <style name="AppTheme.Immersive" parent="AppTheme.NoTitle">
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
