@@ -20,7 +20,8 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField 'String', 'baseUrl', '"xxx"'
+            buildConfigField 'String', 'BASE_URL', '"https://free-api.heweather.com/v5/"'
+            buildConfigField 'String', 'API_KEY', '"e0a0466db26d4efcb0cdb1f6719df1ae"'
         }
         release {
             minifyEnabled false
@@ -36,12 +37,13 @@ dependencies {
 
     //kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.1.51"
     kapt "com.android.databinding:compiler:2.3.1"
 
     //personal library
     implementation "com.github.Mindjet:LiveMVVM:v1.0.4"
     implementation "com.github.Mindjet:RxKit:v1.0.0"
-//    implementation "com.github.Mindjet:AnkoUtil:1.0.0"
+    implementation "com.github.Mindjet:AnkoUtil:1.0.0"
 
     //lifecycle
     implementation "android.arch.lifecycle:runtime:1.0.0"
@@ -53,4 +55,5 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
 }
