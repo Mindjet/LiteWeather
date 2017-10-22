@@ -1,6 +1,7 @@
 package io.github.mindjet.liteweather.viewmodel
 
 import android.databinding.ObservableField
+import android.view.View
 import io.github.mindjet.library.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.databinding.ItemHomeBinding
@@ -20,6 +21,8 @@ class HomeItemViewModel(val city: String) : BaseItemViewModel<ItemHomeBinding>()
 
     val temperature by lazy { ObservableField("-") }
 
+    val condition by lazy { ObservableField("-") }
+
     override fun getLayoutId() = R.layout.item_home
 
     override fun onAttachedTheFirstTime(binding: ItemHomeBinding) {
@@ -35,6 +38,20 @@ class HomeItemViewModel(val city: String) : BaseItemViewModel<ItemHomeBinding>()
         print(data.basic?.city)
         cityName.set(data.basic?.city)
         temperature.set(data.now?.temperature)
+        condition.set(data.now?.condition?.text)
     }
+
+    fun onClick(view: View) {
+
+    }
+
+    fun onShare(view: View) {
+
+    }
+
+    fun onMore(view: View) {
+
+    }
+
 
 }

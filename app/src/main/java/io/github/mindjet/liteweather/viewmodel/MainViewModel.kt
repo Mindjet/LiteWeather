@@ -1,6 +1,7 @@
 package io.github.mindjet.liteweather.viewmodel
 
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
 import io.github.mindjet.liteweather.recycler_view.ListAdapter
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
@@ -20,13 +21,17 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private fun initRecyclerView() {
         val recyclerView = mBinding?.recyclerView
-        recyclerView?.layoutManager = LinearLayoutManager(mBinding?.root?.context, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.layoutManager = GridLayoutManager(mBinding?.root?.context, 2)
         recyclerView?.adapter = adapter
     }
 
     private fun initData() {
         adapter.add(HomeItemViewModel("深圳"))
         adapter.notifyItemInserted(0)
+    }
+
+    fun onFabClick(view: View) {
+
     }
 
 }
