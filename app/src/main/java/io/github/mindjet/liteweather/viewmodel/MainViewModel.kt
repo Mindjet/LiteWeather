@@ -1,5 +1,6 @@
 package io.github.mindjet.liteweather.viewmodel
 
+import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding

@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".view.SearchActivity"
+            android:theme="@style/AppTheme.NoTitle" />
+
     </application>
 
 </manifest>
