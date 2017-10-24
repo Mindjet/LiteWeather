@@ -37,7 +37,7 @@ public class ListAdapter<T extends BaseItemViewModel> extends BaseAdapter implem
 
     @Override
     public int getItemViewType(int position) {
-        return data.get(position).getLayoutId();
+        return data.get(position).needLayoutId();
     }
 
     @Override

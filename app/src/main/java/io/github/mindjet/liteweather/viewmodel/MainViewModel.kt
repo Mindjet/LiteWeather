@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
 import io.github.mindjet.liteweather.recycler_view.ListAdapter
+import io.github.mindjet.liteweather.view.SearchActivity
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 
@@ -21,8 +22,8 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     private fun initRecyclerView() {
-        val recyclerView = mBinding?.recyclerView
-        recyclerView?.layoutManager = GridLayoutManager(mBinding?.root?.context, 2)
+        val recyclerView = binding?.recyclerView
+        recyclerView?.layoutManager = GridLayoutManager(getContext(), 2)
         recyclerView?.adapter = adapter
     }
 
@@ -32,7 +33,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     fun onFabClick(view: View) {
-
+        getActivity()?.startActivity(Intent(getActivity(), SearchActivity::class.java))
     }
 
 }

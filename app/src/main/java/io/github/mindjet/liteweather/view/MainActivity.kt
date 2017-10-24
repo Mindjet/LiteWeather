@@ -11,11 +11,11 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
  */
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    override fun getLayoutId(): Int {
+    override fun needLayoutId(): Int {
         return R.layout.activity_main
     }
 
-    override fun getViewModel(): BaseViewModel<ActivityMainBinding> {
+    override fun needViewModel(): BaseViewModel<ActivityMainBinding> {
         return MainViewModel()
     }
 

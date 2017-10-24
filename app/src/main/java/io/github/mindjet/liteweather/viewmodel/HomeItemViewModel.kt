@@ -23,7 +23,7 @@ class HomeItemViewModel(val city: String) : BaseItemViewModel<ItemHomeBinding>()
 
     val condition by lazy { ObservableField("-") }
 
-    override fun getLayoutId() = R.layout.item_home
+    override fun needLayoutId() = R.layout.item_home
 
     override fun onAttachedTheFirstTime(binding: ItemHomeBinding) {
         RetrofitInstance.getService(WeatherService::class.java)

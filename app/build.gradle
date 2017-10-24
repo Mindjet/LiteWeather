@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
     //design
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -45,7 +45,6 @@ dependencies {
     kapt "com.android.databinding:compiler:2.3.1"
 
     //personal library
-    implementation "com.github.Mindjet:LiveMVVM:v1.0.4"
     implementation "com.github.Mindjet:RxKit:v1.0.0"
     implementation "com.github.Mindjet:AnkoUtil:1.0.0"
 
