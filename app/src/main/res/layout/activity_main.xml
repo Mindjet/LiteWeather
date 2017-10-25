@@ -33,17 +33,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/colorBase" />
+
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                android:elevation="5dp"
+                android:background="@color/colorBase"
                 app:title="@string/app_name"
                 app:titleTextColor="@android:color/white" />
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/colorBase">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recycler_view"

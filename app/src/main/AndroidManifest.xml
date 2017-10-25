@@ -15,7 +15,7 @@
 
         <activity
             android:name="io.github.mindjet.liteweather.view.MainActivity"
-            android:theme="@style/AppTheme.NoTitle">
+            android:theme="@style/AppTheme.Immersive">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

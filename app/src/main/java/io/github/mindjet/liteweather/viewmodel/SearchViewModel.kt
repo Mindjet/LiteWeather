@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import io.github.mindjet.liteweather.databinding.ActivitySearchBinding
+import io.github.mindjet.liteweather.helper.set
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 
 /**
@@ -22,15 +23,16 @@ class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
     }
 
     private fun onSearch() {
-        Toast.makeText(getContext(), editText.text, Toast.LENGTH_SHORT).show()
+        //todo change for the new version of AnkoUtil
+        Toast.makeText(context, editText.text, Toast.LENGTH_SHORT).show()
     }
 
     fun onBack(view: View) {
-        getActivity()?.finish()
+        activity?.finish()
     }
 
     fun onClear(view: View) {
-        editText.setText("")
+        editText set ""
     }
 
 }

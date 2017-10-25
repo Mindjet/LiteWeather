@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -48,6 +49,10 @@ public class ListAdapter<T extends BaseItemViewModel> extends BaseAdapter implem
     @Override
     public boolean isEmpty() {
         return data.isEmpty();
+    }
+
+    public void swap(int from, int to) {
+        Collections.swap(data, from, to);
     }
 
     @Override
