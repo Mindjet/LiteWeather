@@ -7,6 +7,7 @@ import io.github.mindjet.library.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ItemWeatherBinding
+import io.github.mindjet.liteweather.helper.PopupWindowGen
 import io.github.mindjet.liteweather.model.SimpleWeather
 import io.github.mindjet.liteweather.network.RetrofitInstance
 import io.github.mindjet.liteweather.network.WeatherService
@@ -23,6 +24,13 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
     val temperature by lazy { ObservableField("-") }
     val condition by lazy { ObservableField("-") }
     val background by lazy { ObservableField<Drawable>() }
+
+    private val popupWindow by lazy {
+        with(PopupWindowGen(context!!)) {
+            touchOutside = true
+            build()
+        }
+    }
 
     override fun needLayoutId() = R.layout.item_weather
 

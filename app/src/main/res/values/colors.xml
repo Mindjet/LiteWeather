@@ -7,7 +7,7 @@
     <color name="colorBase">#0c1a2d</color>
     
     <color name="colorSunny">#ecd555</color>
-    <color name="colorCloudy">#5ab6d2</color>
+    <color name="colorCloudy">#4fa0b9</color>
     <color name="colorDefault">#ccc</color>
     <color name="colorOvercast">#a1a1a1</color>
 </resources>
