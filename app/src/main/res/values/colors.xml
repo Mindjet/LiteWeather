@@ -9,5 +9,6 @@
     <color name="colorSunny">#ecd555</color>
     <color name="colorCloudy">#4fa0b9</color>
     <color name="colorDefault">#ccc</color>
-    <color name="colorOvercast">#a1a1a1</color>
+    <color name="colorOvercast">#2e5b69</color>
+    <color name="colorFoggy">#a1a1a1</color>
 </resources>

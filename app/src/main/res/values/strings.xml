@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LiteWeather</string>
+    <string name="refresh">刷新</string>
+    <string name="delete">删除</string>
 </resources>

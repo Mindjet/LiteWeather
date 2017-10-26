@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
 import io.github.mindjet.library.start
+import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
+import io.github.mindjet.liteweather.helper.EasyBus
 import io.github.mindjet.liteweather.recycler_view.ListAdapter
 import io.github.mindjet.liteweather.view.SearchActivity
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
@@ -21,6 +23,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     override fun onAttached(binding: ActivityMainBinding) {
         initRecyclerView()
         initData()
+        initReceive()
     }
 
     private fun initRecyclerView() {
@@ -36,6 +39,15 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
         adapter.add(WeatherItemViewModel("北京"))
         adapter.add(WeatherItemViewModel("三亚"))
         adapter.notifyItemRangeInserted(0, 4)
+    }
+
+    private fun initReceive() {
+        EasyBus.subscribe<WeatherItemViewModel>(Constant.SIGNAL_DELETE_ITEM)
+                .subscribe {
+                    val pos = adapter.indexOf(it)
+                    adapter.removeAt(pos)
+                    adapter.notifyItemRemoved(pos)
+                }
     }
 
     fun onFabClick(view: View) {

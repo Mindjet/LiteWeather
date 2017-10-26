@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import io.github.mindjet.library.log
 import io.github.mindjet.liteweather.R
+import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ItemWeatherBinding
+import io.github.mindjet.liteweather.helper.EasyBus
 import io.github.mindjet.liteweather.helper.PopupWindowGen
 import io.github.mindjet.liteweather.model.SimpleWeather
 import io.github.mindjet.liteweather.network.RetrofitInstance
@@ -26,8 +28,10 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
     val background by lazy { ObservableField<Drawable>() }
 
     private val popupWindow by lazy {
-        with(PopupWindowGen(context!!)) {
-            touchOutside = true
+        PopupWindowGen.with(context) {
+            layoutId = R.layout.popup_window
+            addListener(R.id.popup_refresh, { onRefresh(it) })
+            addListener(R.id.popup_delete, { onDelete(it) })
             build()
         }
     }
@@ -36,7 +40,7 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
 
     override fun onAttachedTheFirstTime(binding: ItemWeatherBinding) {
         background.set(context?.resources?.getDrawable(R.drawable.bg_weather_default))
-        updateData()
+//        updateData()
     }
 
     private fun onReceiveData(data: SimpleWeather) {
@@ -64,9 +68,19 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
 
     }
 
-    fun onMore(view: View) {
+    fun onMore(view: View) =
+            popupWindow.showAsDropDown(view)
 
+    private fun onRefresh(view: View) {
+        temperature.set("--")
+        condition.set("--")
+        updateData()
+        popupWindow.dismiss()
     }
 
+    private fun onDelete(view: View) {
+        EasyBus.send(this, Constant.SIGNAL_DELETE_ITEM)
+        popupWindow.dismiss()
+    }
 
 }

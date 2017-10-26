@@ -1,5 +1,6 @@
 package io.github.mindjet.liteweather.helper
 
+import android.content.Context
 import android.content.Intent
 import android.widget.TextView
 import io.github.mindjet.livemvvm.helper.ActivityStack
@@ -14,4 +15,9 @@ inline fun <reified T> start() {
 
 infix fun TextView.set(string: String) {
     this.text = string
+}
+
+fun Int.dp2px(context: Context): Int {
+    val density = context.resources.displayMetrics.density
+    return (this * density + 0.5f).toInt()
 }

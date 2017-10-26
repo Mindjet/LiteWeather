@@ -11,12 +11,14 @@ object WeatherTxt {
     const val CLOUDY = "多云"
     const val OVERCAST = "阴"
     const val RAINNY = "雨"
+    const val FOGGY = "雾"
 
-    fun getCorrespondingBackground(string: String): Int{
-        return when(string){
+    fun getCorrespondingBackground(string: String): Int {
+        return when (string) {
             SUNNY -> R.drawable.bg_weather_sunny
             CLOUDY -> R.drawable.bg_weather_cloudy
             OVERCAST -> R.drawable.bg_weather_overcast
+            FOGGY -> R.drawable.bg_weather_foggy
             else -> R.drawable.bg_weather_default
         }
     }
