@@ -1,13 +1,16 @@
 package io.github.mindjet.liteweather.viewmodel
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.View
-import io.github.mindjet.library.start
+import android.view.ViewAnimationUtils
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
 import io.github.mindjet.liteweather.helper.EasyBus
+import io.github.mindjet.liteweather.helper.startWithFade
 import io.github.mindjet.liteweather.recycler_view.ListAdapter
 import io.github.mindjet.liteweather.view.SearchActivity
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
@@ -19,6 +22,12 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
+
+    private val revealMask by lazy { binding?.revealMask!! }
+
+    private var fabX = 0
+    private var fabY = 0
+    private var revealRadius = 0f
 
     override fun onAttached(binding: ActivityMainBinding) {
         initRecyclerView()
@@ -51,7 +60,29 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     fun onFabClick(view: View) {
-        activity?.start<SearchActivity>()
+        view.isClickable = false
+        if (fabX == 0 && fabY == 0) {
+            val pos = IntArray(2); view.getLocationOnScreen(pos)
+            fabX = pos[0] + view.width / 2; fabY = pos[1] + view.height / 2
+            revealRadius = Math.sqrt(Math.pow(fabX.toDouble(), 2.toDouble()) + Math.pow(fabY.toDouble(), 2.toDouble())).toFloat()
+        }
+        val va = ViewAnimationUtils.createCircularReveal(revealMask, fabX, fabY, 0f, revealRadius)
+        va.duration = 400
+        revealMask.visibility = View.VISIBLE
+        va.start()
+        view.postDelayed({ startWithFade<SearchActivity>(); view.isClickable = true }, 320)
+    }
+
+    override fun onResume() {
+        if (!revealMask.isAttachedToWindow) return
+        val va = ViewAnimationUtils.createCircularReveal(revealMask, fabX, fabY, revealRadius, 0f)
+        va.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                revealMask.visibility = View.GONE
+            }
+        })
+        va.duration = 400
+        va.start()
     }
 
     private inner class DragItemTouchHelperCallback : ItemTouchHelper.Callback() {

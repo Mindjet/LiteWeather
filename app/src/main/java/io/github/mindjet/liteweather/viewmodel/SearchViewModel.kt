@@ -3,9 +3,10 @@ package io.github.mindjet.liteweather.viewmodel
 import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
-import android.widget.Toast
 import io.github.mindjet.liteweather.databinding.ActivitySearchBinding
+import io.github.mindjet.liteweather.helper.finishWithFade
 import io.github.mindjet.liteweather.helper.set
+import io.github.mindjet.liteweather.helper.toast
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 
 /**
@@ -23,16 +24,20 @@ class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
     }
 
     private fun onSearch() {
-        //todo change for the new version of AnkoUtil
-        Toast.makeText(context, editText.text, Toast.LENGTH_SHORT).show()
+        toast("${editText.text}")
     }
 
     fun onBack(view: View) {
-        activity?.finish()
+        finishWithFade()
     }
 
     fun onClear(view: View) {
         editText set ""
+    }
+
+    override fun onBackPressed(): Boolean {
+        finishWithFade()
+        return true
     }
 
 }

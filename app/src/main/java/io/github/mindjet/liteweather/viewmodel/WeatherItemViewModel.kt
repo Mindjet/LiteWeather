@@ -3,7 +3,7 @@ package io.github.mindjet.liteweather.viewmodel
 import android.databinding.ObservableField
 import android.graphics.drawable.Drawable
 import android.view.View
-import io.github.mindjet.library.log
+import io.github.mindjet.library.extension.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.consant.WeatherTxt
@@ -52,7 +52,7 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
     }
 
     private fun updateData() {
-        RetrofitInstance.getService(WeatherService::class.java)
+        RetrofitInstance.get<WeatherService>()
                 .getSimpleWeather(city)
                 .subscribeOn(Schedulers.io())
                 .map { it.data?.get(0) }

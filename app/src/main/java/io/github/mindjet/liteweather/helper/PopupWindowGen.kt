@@ -31,7 +31,7 @@ class PopupWindowGen private constructor(private val context: Context) {
 
     fun build(): PopupWindow {
         val popupView = LayoutInflater.from(context).inflate(layoutId, null)
-        val popupWindow = PopupWindow(popupView, width.dp2px(context), ViewGroup.LayoutParams.WRAP_CONTENT, true)
+        val popupWindow = PopupWindow(popupView, width.dp2px(), ViewGroup.LayoutParams.WRAP_CONTENT, true)
         popupWindow.setBackgroundDrawable(context.resources.getDrawable(android.R.color.white))     //加了这句才能点击其他区域自动关闭
         popupWindow.isOutsideTouchable = touchOutside
         popupWindow.isTouchable = true

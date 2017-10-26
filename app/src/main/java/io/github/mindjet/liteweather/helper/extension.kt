@@ -1,8 +1,8 @@
 package io.github.mindjet.liteweather.helper
 
-import android.content.Context
 import android.content.Intent
 import android.widget.TextView
+import io.github.mindjet.library.extension.toast
 import io.github.mindjet.livemvvm.helper.ActivityStack
 
 /**
@@ -13,11 +13,29 @@ inline fun <reified T> start() {
     now.startActivity(Intent(now, T::class.java))
 }
 
+inline fun <reified T> startWithFade() {
+    val now = ActivityStack.currentActivity()
+    now.startActivity(Intent(now, T::class.java))
+    now.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+}
+
+fun finishWithFade() {
+    val now = ActivityStack.currentActivity()
+    now.finish()
+    now.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+}
+
 infix fun TextView.set(string: String) {
     this.text = string
 }
 
-fun Int.dp2px(context: Context): Int {
-    val density = context.resources.displayMetrics.density
+fun toast(content: String) {
+    val now = ActivityStack.currentActivity()
+    now.toast(content)
+}
+
+fun Int.dp2px(): Int {
+    val now = ActivityStack.currentActivity()
+    val density = now.resources.displayMetrics.density
     return (this * density + 0.5f).toInt()
 }

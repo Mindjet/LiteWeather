@@ -1,6 +1,6 @@
 package io.github.mindjet.liteweather.network
 
-import io.github.mindjet.library.log
+import io.github.mindjet.library.extension.log
 import io.github.mindjet.liteweather.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitInstance {
 
-    private val retrofit: Retrofit by lazy {
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -32,8 +32,8 @@ object RetrofitInstance {
             }
             .build()
 
-    fun <T> getService(clazz: Class<T>): T {
-        return retrofit.create(clazz)
+    inline fun <reified T> get(): T {
+        return retrofit.create(T::class.java)
     }
 
 }
