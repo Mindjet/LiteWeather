@@ -1,16 +1,13 @@
 package io.github.mindjet.liteweather.viewmodel
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
-import android.view.View
-import android.view.ViewAnimationUtils
+import io.github.mindjet.library.extension.log
+import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
 import io.github.mindjet.liteweather.helper.EasyBus
-import io.github.mindjet.liteweather.helper.startWithFade
 import io.github.mindjet.liteweather.recycler_view.ListAdapter
 import io.github.mindjet.liteweather.view.SearchActivity
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
@@ -22,17 +19,14 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
-
-    private val revealMask by lazy { binding?.revealMask!! }
-
-    private var fabX = 0
-    private var fabY = 0
-    private var revealRadius = 0f
+    private val revealLayout by lazy { binding?.revealLayout }
 
     override fun onAttached(binding: ActivityMainBinding) {
         initRecyclerView()
         initData()
         initReceive()
+        //Todo 包装在 RevealLayout内部并且移除该监听器
+        revealLayout?.viewTreeObserver?.addOnWindowFocusChangeListener { log("on reveal layout changed"); initRevealLayout() }
     }
 
     private fun initRecyclerView() {
@@ -59,30 +53,18 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
                 }
     }
 
-    fun onFabClick(view: View) {
-        view.isClickable = false
-        if (fabX == 0 && fabY == 0) {
-            val pos = IntArray(2); view.getLocationOnScreen(pos)
-            fabX = pos[0] + view.width / 2; fabY = pos[1] + view.height / 2
-            revealRadius = Math.sqrt(Math.pow(fabX.toDouble(), 2.toDouble()) + Math.pow(fabY.toDouble(), 2.toDouble())).toFloat()
+    private fun initRevealLayout() {
+        with(revealLayout!!) {
+            fromTo(activity!!, SearchActivity::class.java)
+            fabIcon = R.mipmap.ic_add
+            fabColor = context.resources.getColor(R.color.colorSunny)
+            revealMaskColor = context.resources.getColor(android.R.color.white)
+            notifyChanged()
         }
-        val va = ViewAnimationUtils.createCircularReveal(revealMask, fabX, fabY, 0f, revealRadius)
-        va.duration = 400
-        revealMask.visibility = View.VISIBLE
-        va.start()
-        view.postDelayed({ startWithFade<SearchActivity>(); view.isClickable = true }, 320)
     }
 
     override fun onResume() {
-        if (!revealMask.isAttachedToWindow) return
-        val va = ViewAnimationUtils.createCircularReveal(revealMask, fabX, fabY, revealRadius, 0f)
-        va.addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationEnd(animation: Animator?) {
-                revealMask.visibility = View.GONE
-            }
-        })
-        va.duration = 400
-        va.start()
+        revealLayout?.backToActivity()
     }
 
     private inner class DragItemTouchHelperCallback : ItemTouchHelper.Callback() {
@@ -103,6 +85,5 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
         }
     }
-
 
 }

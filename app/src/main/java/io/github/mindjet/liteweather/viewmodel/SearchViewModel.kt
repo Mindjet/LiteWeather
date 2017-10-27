@@ -4,9 +4,9 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import io.github.mindjet.liteweather.databinding.ActivitySearchBinding
-import io.github.mindjet.liteweather.helper.finishWithFade
 import io.github.mindjet.liteweather.helper.set
 import io.github.mindjet.liteweather.helper.toast
+import io.github.mindjet.liteweather.view.custom.RevealLayout
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 
 /**
@@ -28,7 +28,7 @@ class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
     }
 
     fun onBack(view: View) {
-        finishWithFade()
+        RevealLayout.concealFinish(activity!!)
     }
 
     fun onClear(view: View) {
@@ -36,7 +36,7 @@ class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
     }
 
     override fun onBackPressed(): Boolean {
-        finishWithFade()
+        RevealLayout.concealFinish(activity!!)
         return true
     }
 
