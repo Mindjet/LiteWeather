@@ -3,6 +3,7 @@ package io.github.mindjet.liteweather.viewmodel
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.view.Gravity
 import io.github.mindjet.library.extension.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
@@ -25,8 +26,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
         initRecyclerView()
         initData()
         initReceive()
-        //Todo 包装在 RevealLayout内部并且移除该监听器
-        revealLayout?.viewTreeObserver?.addOnWindowFocusChangeListener { log("on reveal layout changed"); initRevealLayout() }
+        initRevealLayout()
     }
 
     private fun initRecyclerView() {
@@ -56,6 +56,8 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     private fun initRevealLayout() {
         with(revealLayout!!) {
             fromTo(activity!!, SearchActivity::class.java)
+            revealDuration = 300
+            fabGravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
             fabIcon = R.mipmap.ic_add
             fabColor = context.resources.getColor(R.color.colorSunny)
             revealMaskColor = context.resources.getColor(android.R.color.white)
@@ -64,7 +66,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     override fun onResume() {
-        revealLayout?.backToActivity()
+        revealLayout?.concealBack()
     }
 
     private inner class DragItemTouchHelperCallback : ItemTouchHelper.Callback() {

@@ -23,8 +23,8 @@ import rx.schedulers.Schedulers
 class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBinding>() {
 
     val cityName by lazy { ObservableField(city) }
-    val temperature by lazy { ObservableField("-") }
-    val condition by lazy { ObservableField("-") }
+    val temperature by lazy { ObservableField("--") }
+    val condition by lazy { ObservableField("--") }
     val background by lazy { ObservableField<Drawable>() }
 
     private val popupWindow by lazy {

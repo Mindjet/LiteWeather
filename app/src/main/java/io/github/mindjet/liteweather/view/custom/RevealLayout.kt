@@ -6,6 +6,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.support.design.widget.FloatingActionButton
@@ -15,7 +16,6 @@ import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import io.github.mindjet.library.extension.log
 import java.lang.ref.WeakReference
 
 /**
@@ -70,13 +70,17 @@ class RevealLayout : FrameLayout {
         addRevealMask()
     }
 
+    override fun dispatchDraw(canvas: Canvas?) {
+        super.dispatchDraw(canvas)
+        if (revealRadius == 0) calParams()
+    }
+
     private fun addFab() {
         addView(fab)
         updateFabStyle()
         with(fab) {
             layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
             layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            viewTreeObserver.addOnWindowFocusChangeListener { calParams() }
             setOnClickListener { onFabClick(it) }
         }
     }
@@ -92,10 +96,13 @@ class RevealLayout : FrameLayout {
     }
 
     private fun updateFabStyle() {
-        fab.changeLayoutGravity(fabGravity)
+        val lp = FrameLayout.LayoutParams(layoutParams)
+        val px = fabMargin.dp2px()
+        lp.gravity = fabGravity
+        lp.setMargins(px, px, px, px)
+        fab.layoutParams = lp
         fab.setImageResource(fabIcon)
         fab.backgroundTintList = ColorStateList.valueOf(fabColor)
-        fab.changeMargin(fabMargin)
     }
 
     private fun updateRevealMaskStyle() {
@@ -109,10 +116,7 @@ class RevealLayout : FrameLayout {
         fab.getLocationOnScreen(fabPos)
         centerX = fabPos[0] - parentPos[0] + fab.width / 2
         centerY = fabPos[1] - parentPos[1] + fab.height / 2
-        log("screen ${context.resources.displayMetrics.widthPixels} ${context.resources.displayMetrics.heightPixels}")
-        log("fab ${fabPos[0]} ${fabPos[1]}  width: ${fab.width} margin: ${fabMargin.dp2px()}")
-        log("parent ${parentPos[0]} ${parentPos[1]}")
-        revealRadius = Math.max(width, height)
+        revealRadius = Math.sqrt((width pow 2) + (height pow 2)).toInt()
     }
 
 
@@ -134,7 +138,7 @@ class RevealLayout : FrameLayout {
         from.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 
-    fun backToActivity() {
+    fun concealBack() {
         if (!isAttachedToWindow) return
         val va = ViewAnimationUtils.createCircularReveal(revealMask, centerX, centerY, revealRadius.toFloat(), 0f)
         va.duration = concealDuration
@@ -153,21 +157,13 @@ class RevealLayout : FrameLayout {
         calParams()
     }
 
-    private fun View.changeLayoutGravity(gravity: Int) {
-        val lp = FrameLayout.LayoutParams(layoutParams)
-        lp.gravity = gravity
-        this.layoutParams = lp
-    }
-
-    private fun View.changeMargin(margin: Int) {
-        val mlp = this.layoutParams as ViewGroup.MarginLayoutParams
-        val px = margin.dp2px()
-        mlp.setMargins(px, px, px, px)
-    }
-
     private fun Int.dp2px(): Int {
         val density = context.resources.displayMetrics.density
         return (this * density + 0.5f).toInt()
+    }
+
+    private infix fun Int.pow(pow: Int): Double {
+        return Math.pow(this.toDouble(), pow.toDouble())
     }
 
 }
