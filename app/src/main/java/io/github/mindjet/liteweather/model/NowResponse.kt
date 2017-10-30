@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * Created by Mindjet on 2017/10/18.
  */
-class SimpleWeather {
+class NowResponse {
 
     @SerializedName("basic")
     val basic: Basic? = null
@@ -14,5 +14,7 @@ class SimpleWeather {
     val now: Now? = null
 
     val status: String? = null
+
+    val update: Update? = null
 
 }

@@ -10,7 +10,7 @@ import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ItemWeatherBinding
 import io.github.mindjet.liteweather.helper.EasyBus
 import io.github.mindjet.liteweather.helper.PopupWindowGen
-import io.github.mindjet.liteweather.model.SimpleWeather
+import io.github.mindjet.liteweather.model.NowResponse
 import io.github.mindjet.liteweather.network.RetrofitInstance
 import io.github.mindjet.liteweather.network.WeatherService
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
@@ -43,12 +43,11 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
 //        updateData()
     }
 
-    private fun onReceiveData(data: SimpleWeather) {
-        print(data.basic?.city)
-        cityName.set(data.basic?.city)
+    private fun onReceiveData(data: NowResponse) {
+        cityName.set(data.basic?.location)
         temperature.set(data.now?.temperature)
-        condition.set(data.now?.condition?.text)
-        background.set(context?.resources?.getDrawable(WeatherTxt.getCorrespondingBackground(data.now?.condition?.text!!)))
+        condition.set(data.now?.conditionTxt)
+        background.set(context?.resources?.getDrawable(WeatherTxt.getCorrespondingBackground(data.now?.conditionTxt!!)))
     }
 
     private fun updateData() {

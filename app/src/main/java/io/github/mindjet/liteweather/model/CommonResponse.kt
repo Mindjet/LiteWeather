@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 class CommonResponse<out T> {
 
-    @SerializedName("HeWeather5")
+    @SerializedName("HeWeather6")
     val data: List<T>? = null
 
 }

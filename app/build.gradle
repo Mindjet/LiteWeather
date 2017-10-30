@@ -20,7 +20,7 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField 'String', 'BASE_URL', '"https://free-api.heweather.com/v5/"'
+            buildConfigField 'String', 'BASE_URL', '"https://free-api.heweather.com/s6/weather/"'
             buildConfigField 'String', 'API_KEY', '"e0a0466db26d4efcb0cdb1f6719df1ae"'
         }
         release {
