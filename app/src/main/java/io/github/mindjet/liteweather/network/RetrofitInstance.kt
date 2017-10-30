@@ -26,7 +26,15 @@ object RetrofitInstance {
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
             .addInterceptor {
-                val request = it.request()
+                var request = it.request()
+
+                //add api key as query parameter
+                val newUrl = request.url()
+                        .newBuilder()
+                        .addQueryParameter("key", BuildConfig.API_KEY)
+                        .build()
+                request = request.newBuilder().url(newUrl).build()
+
                 log("---> ${request.method()}: ${request.url()}")
                 it.proceed(request)
             }
