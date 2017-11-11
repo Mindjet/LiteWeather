@@ -11,6 +11,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        android:background="#f1f1f1"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -87,8 +88,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:foreground="?attr/selectableItemBackground"
+                android:onClick="@{data::onResultClick}"
                 app:cardCornerRadius="5dp"
-                app:cardElevation="5dp"
+                app:cardElevation="2dp"
                 app:visible="@{data.resultVisible}"
                 bind:visibility="visible">
 
@@ -97,11 +99,14 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    android:padding="12dp">
+                    android:paddingBottom="20dp"
+                    android:paddingEnd="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="20dp">
 
                     <ImageView
-                        android:layout_width="26dp"
-                        android:layout_height="26dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:alpha=".5"
                         android:src="@mipmap/ic_location_city" />
 
@@ -110,8 +115,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:text="@{data.resultLocation}"
+                        android:textColor="@android:color/black"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         bind:text="中国-广东省-深圳市" />
 
                 </LinearLayout>

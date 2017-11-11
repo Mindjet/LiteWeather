@@ -6,4 +6,5 @@ package io.github.mindjet.liteweather.consant
 
 object Constant {
     const val SIGNAL_DELETE_ITEM = "signal-delete-item"
+    const val SIGNAL_ADD_ITEM = "signal-add-item"
 }

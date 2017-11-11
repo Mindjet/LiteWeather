@@ -4,7 +4,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.Gravity
-import io.github.mindjet.library.extension.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.databinding.ActivityMainBinding
@@ -21,6 +20,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
     private val revealLayout by lazy { binding?.revealLayout }
+    private val recyclerView by lazy { binding?.recyclerView }
 
     override fun onAttached(binding: ActivityMainBinding) {
         initRecyclerView()
@@ -30,18 +30,16 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     private fun initRecyclerView() {
-        val recyclerView = binding?.recyclerView
         recyclerView?.layoutManager = GridLayoutManager(context, 2)
         recyclerView?.adapter = adapter
         ItemTouchHelper(DragItemTouchHelperCallback()).attachToRecyclerView(recyclerView)
     }
 
     private fun initData() {
-        adapter.add(WeatherItemViewModel("九寨沟"))
-        adapter.add(WeatherItemViewModel("沈阳"))
         adapter.add(WeatherItemViewModel("北京"))
-        adapter.add(WeatherItemViewModel("三亚"))
-        adapter.notifyItemRangeInserted(0, 4)
+        adapter.add(WeatherItemViewModel("九寨沟"))
+        adapter.add(WeatherItemViewModel("乌鲁木齐"))
+        adapter.notifyItemRangeInserted(0, 3)
     }
 
     private fun initReceive() {
@@ -50,6 +48,12 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
                     val pos = adapter.indexOf(it)
                     adapter.removeAt(pos)
                     adapter.notifyItemRemoved(pos)
+                }
+        EasyBus.subscribe<String>(Constant.SIGNAL_ADD_ITEM)
+                .subscribe {
+                    adapter.add(WeatherItemViewModel(it))
+                    adapter.notifyItemInserted(adapter.size)
+                    recyclerView?.scrollToPosition(adapter.size - 1)
                 }
     }
 
