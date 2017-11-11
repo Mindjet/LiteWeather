@@ -29,6 +29,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Immersive" />
 
+        <activity
+            android:name=".view.DetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Immersive" />
+
     </application>
 
 </manifest>

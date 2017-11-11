@@ -13,6 +13,13 @@ inline fun <reified T> start() {
     now.startActivity(Intent(now, T::class.java))
 }
 
+inline fun <reified T> start(vararg extra: Pair<String, String>) {
+    val now = ActivityStack.currentActivity()
+    val intent = Intent(now, T::class.java)
+    extra.forEach { intent.putExtra(it.first, it.second) }
+    now.startActivity(intent)
+}
+
 inline fun <reified T> startWithFade() {
     val now = ActivityStack.currentActivity()
     now.startActivity(Intent(now, T::class.java))

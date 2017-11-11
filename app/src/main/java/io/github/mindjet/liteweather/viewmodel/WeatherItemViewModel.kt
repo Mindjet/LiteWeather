@@ -10,9 +10,11 @@ import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ItemWeatherBinding
 import io.github.mindjet.liteweather.helper.EasyBus
 import io.github.mindjet.liteweather.helper.PopupWindowGen
+import io.github.mindjet.liteweather.helper.start
 import io.github.mindjet.liteweather.model.NowResponse
 import io.github.mindjet.liteweather.network.RetrofitInstance
 import io.github.mindjet.liteweather.network.WeatherService
+import io.github.mindjet.liteweather.view.DetailActivity
 import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -40,7 +42,7 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
 
     override fun onAttachedTheFirstTime(binding: ItemWeatherBinding) {
         background.set(context?.resources?.getDrawable(R.drawable.bg_weather_default))
-//        updateData()
+        updateData()
     }
 
     private fun onReceiveData(data: NowResponse) {
@@ -60,7 +62,7 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
     }
 
     fun onClick(view: View) {
-
+        start<DetailActivity>(Pair(Constant.INTENT_CITYNAME, cityName.get()), Pair(Constant.INTENT_CONDITION, condition.get()))
     }
 
     fun onShare(view: View) {

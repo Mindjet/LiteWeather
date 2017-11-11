@@ -16,4 +16,17 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="TextAppearance">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextAppearance.Collapsed" parent="TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.Expend" parent="TextAppearance">
+        <item name="android:textSize">50sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
