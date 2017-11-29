@@ -59,6 +59,11 @@ class RevealLayout : FrameLayout {
 
     }
 
+    fun config(body: RevealLayout.() -> Unit) {
+        body.invoke(this)
+        notifyChanged()
+    }
+
     fun <T> fromTo(activity: Activity, clazz: Class<T>) {
         from = WeakReference(activity)
         to = WeakReference(clazz)

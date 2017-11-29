@@ -58,14 +58,13 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
     }
 
     private fun initRevealLayout() {
-        with(revealLayout!!) {
+        revealLayout?.config {
             fromTo(activity!!, SearchActivity::class.java)
             revealDuration = 300
             fabGravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
             fabIcon = R.mipmap.ic_add
             fabColor = context.resources.getColor(R.color.colorSunny)
             revealMaskColor = context.resources.getColor(android.R.color.white)
-            notifyChanged()
         }
     }
 
