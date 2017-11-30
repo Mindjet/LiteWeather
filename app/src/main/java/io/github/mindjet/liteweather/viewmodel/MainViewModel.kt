@@ -37,9 +37,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private fun initData() {
         adapter.add(WeatherItemViewModel("北京"))
-        adapter.add(WeatherItemViewModel("九寨沟"))
-        adapter.add(WeatherItemViewModel("乌鲁木齐"))
-        adapter.notifyItemRangeInserted(0, 3)
+        adapter.notifyItemRangeInserted(0, 1)
     }
 
     private fun initReceive() {

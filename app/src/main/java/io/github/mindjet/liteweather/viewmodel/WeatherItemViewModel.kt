@@ -62,7 +62,10 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
     }
 
     fun onClick(view: View) {
-        start<DetailActivity>(Pair(Constant.INTENT_CITYNAME, cityName.get()), Pair(Constant.INTENT_CONDITION, condition.get()))
+        start<DetailActivity>(
+                Pair(Constant.INTENT_CITYNAME, cityName.get()),
+                Pair(Constant.INTENT_CONDITION, condition.get()),
+                Pair(Constant.INTENT_TEMPERATURE, temperature.get()))
     }
 
     fun onShare(view: View) {

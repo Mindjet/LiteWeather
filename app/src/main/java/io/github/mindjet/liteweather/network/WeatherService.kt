@@ -16,7 +16,7 @@ interface WeatherService {
     @GET("https://api.heweather.com/v5/search")
     fun searchCity(@Query("city") city: String): Observable<CommonResponseV5<SearchResponse>>
 
-    @GET("")
+    @GET("weather")
     fun getDetailWeather(@Query("location") city: String): Observable<CommonResponse<DetailResponse>>
 
 }

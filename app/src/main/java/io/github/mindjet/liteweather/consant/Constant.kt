@@ -10,4 +10,5 @@ object Constant {
 
     const val INTENT_CITYNAME = "intent-cityname"
     const val INTENT_CONDITION = "intent-condition"
+    const val INTENT_TEMPERATURE = "intent-temperature"
 }

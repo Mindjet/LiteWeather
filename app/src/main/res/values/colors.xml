@@ -5,7 +5,8 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorBase">#0c1a2d</color>
-    
+    <color name="colorBaseLight">#102036</color>
+
     <color name="colorSunny">#ecd555</color>
     <color name="colorCloudy">#4fa0b9</color>
     <color name="colorDefault">#ccc</color>
