@@ -3,14 +3,19 @@ package io.github.mindjet.liteweather.viewmodel
 import android.databinding.ObservableField
 import android.graphics.Color
 import android.graphics.drawable.Drawable
+import android.support.v7.widget.LinearLayoutManager
+import io.github.mindjet.library.extension.log
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ActivityDetailBinding
+import io.github.mindjet.liteweather.helper.toast
 import io.github.mindjet.liteweather.model.DetailResponse
 import io.github.mindjet.liteweather.network.CommTrans
 import io.github.mindjet.liteweather.network.RetrofitInstance
 import io.github.mindjet.liteweather.network.WeatherService
+import io.github.mindjet.liteweather.recycler_view.ListAdapter
+import io.github.mindjet.livemvvm.viewmodel.BaseItemViewModel
 import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 
 /**
@@ -30,6 +35,8 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
 
     private var response: DetailResponse? = null
 
+    private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
+
     val cityOb by lazy { ObservableField("--") }
     val tempOb by lazy { ObservableField("--") }
     val conditionOb by lazy { ObservableField("--") }
@@ -41,6 +48,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
         cityOb.set(city)
         tempOb.set(temperature)
         conditionOb.set(condition)
+        initRecyclerView()
         initCollapsingLayout()
         updateBackground()
         fetchData()
@@ -53,6 +61,11 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
         toolbar?.setNavigationOnClickListener { onBack() }
     }
 
+    private fun initRecyclerView() {
+        recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        recyclerView?.adapter = adapter
+    }
+
     private fun fetchData() {
         RetrofitInstance.get<WeatherService>()
                 .getDetailWeather(city!!)
@@ -60,7 +73,8 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
                 .subscribe({
                     response = it
                     updateNowBlock()
-                })
+                    updateDailyBlock()
+                }, { log(it) })
     }
 
     private fun updateBackground() {
@@ -73,6 +87,12 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
         conditionOb.set(response?.now?.conditionTxt)
         windOb.set("${response?.now?.windScale}/${response?.now?.windDirection}")
         humidityOb.set("湿度${response?.now?.humidity}%")
+    }
+
+    private fun updateDailyBlock() {
+        adapter.add(UpcomingDailyViewModel(response?.dailyForecast))
+        adapter.notifyItemInserted(0)
+        toast(adapter.size.toString())
     }
 
     fun onBack() {

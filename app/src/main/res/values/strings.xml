@@ -3,4 +3,5 @@
     <string name="refresh">刷新</string>
     <string name="delete">删除</string>
     <string name="celcius">℃</string>
+    <string name="upcoming_three_days_weather">未来3日天气情况</string>
 </resources>
