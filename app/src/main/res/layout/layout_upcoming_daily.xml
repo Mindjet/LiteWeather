@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_borderless"
                 android:gravity="center"
-                android:onClick="@{() -> data.handleItemClick(0)}"
+                android:onClick="@{(v) -> data.handleItemClick(v, 0)}"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{data.getDay(0)}"
+                    android:text="@{`周`+data.getDay(0)}"
                     android:textColor="@android:color/white"
                     bind:text="周五" />
 
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_borderless"
                 android:gravity="center"
-                android:onClick="@{() -> data.handleItemClick(1)}"
+                android:onClick="@{(v) -> data.handleItemClick(v, 1)}"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{data.getDay(1)}"
+                    android:text="@{`周`+data.getDay(1)}"
                     android:textColor="@android:color/white"
                     bind:text="周五" />
 
@@ -91,7 +91,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/ripple_borderless"
                 android:gravity="center"
-                android:onClick="@{() -> data.handleItemClick(2)}"
+                android:onClick="@{(v) -> data.handleItemClick(v, 2)}"
                 android:orientation="vertical"
                 android:padding="10dp">
 
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@{data.getDay(2)}"
+                    android:text="@{`周`+data.getDay(2)}"
                     android:textColor="@android:color/white"
                     bind:text="周五" />
 

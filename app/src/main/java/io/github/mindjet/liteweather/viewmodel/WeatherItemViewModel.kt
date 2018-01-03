@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers
 /**
  * Created by Mindjet on 2017/10/18.
  */
-class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBinding>() {
+class WeatherItemViewModel(private val city: String) : BaseItemViewModel<ItemWeatherBinding>() {
 
     val cityName by lazy { ObservableField(city) }
     val temperature by lazy { ObservableField("--") }
@@ -31,7 +31,7 @@ class WeatherItemViewModel(val city: String) : BaseItemViewModel<ItemWeatherBind
 
     private val popupWindow by lazy {
         PopupWindowGen.with(context) {
-            layoutId = R.layout.popup_window
+            layoutId = R.layout.popup_weather_item_options
             addListener(R.id.popup_refresh, { onRefresh(it) })
             addListener(R.id.popup_delete, { onDelete(it) })
             build()
