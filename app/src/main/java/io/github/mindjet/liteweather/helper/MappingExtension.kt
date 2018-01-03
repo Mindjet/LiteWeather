@@ -6,5 +6,5 @@ package io.github.mindjet.liteweather.helper
 
 fun Int.numToDay(): String {
     val list = listOf("日", "一", "二", "三", "四", "五", "六")
-    return list[this - 1]
+    return list[this]
 }

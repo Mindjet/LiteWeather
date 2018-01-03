@@ -25,7 +25,7 @@ allprojects {
         jcenter()
         maven { url properties.getProperty("sdk.dir") + "/extras/android/m2repository/" }
         maven { url properties.getProperty("sdk.dir") + "/extras/google/m2repository/" }
-        maven { url 'https://jitpack.io' }
+        maven { url 'http://jitpack.io' }
         mavenCentral()
     }
 }

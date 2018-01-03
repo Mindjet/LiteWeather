@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers
  */
 class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
 
-    private val editText: EditText by lazy { binding?.editText!! }
+    private val editText: EditText by lazy { binding.editText!! }
     private var cityName: String = ""
 
     val resultVisible by lazy { ObservableField(false) }
@@ -80,7 +80,7 @@ class SearchViewModel : BaseViewModel<ActivitySearchBinding>() {
     }
 
     override fun onBackPressed(): Boolean {
-        RevealLayout.concealFinish(activity!!)
+        RevealLayout.concealFinish(activity)
         return true
     }
 

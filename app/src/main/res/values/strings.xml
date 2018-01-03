@@ -4,4 +4,10 @@
     <string name="delete">删除</string>
     <string name="celcius">℃</string>
     <string name="upcoming_three_days_weather">未来3日天气情况</string>
+
+    <string name="temperature">温度</string>
+    <string name="humidity">湿度</string>
+    <string name="wind_speed_direction">风力/风向</string>
+    <string name="sunrise_sunset">日出/日落</string>
+
 </resources>

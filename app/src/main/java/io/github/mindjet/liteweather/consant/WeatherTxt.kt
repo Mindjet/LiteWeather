@@ -13,6 +13,8 @@ object WeatherTxt {
     const val RAINNY = "雨"
     const val FOGGY = "雾"
     const val SHOWER = "阵雨"
+    const val SLEET = "雨夹雪"
+    const val SUNNY_INTERVAL = "晴间多云"
 
     fun getCorrespondingBackground(string: String): Int {
         return when (string) {

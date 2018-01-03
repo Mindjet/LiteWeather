@@ -47,7 +47,7 @@ dependencies {
     //personal library
     implementation "com.github.Mindjet:RxKit:v1.0.0"
     implementation "com.github.Mindjet:AnkoUtil:1.0.1"
-    implementation "com.github.Mindjet:LiveMVVM:1.1.0"
+    implementation "com.github.Mindjet:LiveMVVM:1.1.3"
 
     //lifecycle
     implementation "android.arch.lifecycle:runtime:1.0.0"

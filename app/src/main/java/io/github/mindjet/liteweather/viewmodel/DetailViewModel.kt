@@ -25,13 +25,13 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
  */
 class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
 
-    private val city by lazy { activity?.intent?.getStringExtra(Constant.INTENT_CITYNAME) }
-    private val condition by lazy { activity?.intent?.getStringExtra(Constant.INTENT_CONDITION) }
-    private val temperature by lazy { activity?.intent?.getStringExtra(Constant.INTENT_TEMPERATURE) }
+    private val city by lazy { activity.intent.getStringExtra(Constant.INTENT_CITYNAME) }
+    private val condition by lazy { activity.intent.getStringExtra(Constant.INTENT_CONDITION) }
+    private val temperature by lazy { activity.intent.getStringExtra(Constant.INTENT_TEMPERATURE) }
 
-    private val recyclerView by lazy { binding?.recyclerView }
-    private val collapsingLayout by lazy { binding?.collapsingLayout }
-    private val toolbar by lazy { binding?.toolbar }
+    private val recyclerView by lazy { binding.recyclerView }
+    private val collapsingLayout by lazy { binding.collapsingLayout }
+    private val toolbar by lazy { binding.toolbar }
 
     private var response: DetailResponse? = null
 
@@ -79,7 +79,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
 
     private fun updateBackground() {
         val drawableId = WeatherTxt.getCorrespondingBackground(condition!!)
-        background.set(context?.resources?.getDrawable(drawableId))
+        background.set(context.resources?.getDrawable(drawableId))
     }
 
     private fun updateNowBlock() {
@@ -96,7 +96,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     }
 
     fun onBack() {
-        activity?.onBackPressed()
+        activity.onBackPressed()
     }
 
 }

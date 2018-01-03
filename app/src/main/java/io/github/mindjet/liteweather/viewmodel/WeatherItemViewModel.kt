@@ -41,7 +41,7 @@ class WeatherItemViewModel(private val city: String) : BaseItemViewModel<ItemWea
     override fun needLayoutId() = R.layout.item_weather
 
     override fun onAttachedTheFirstTime(binding: ItemWeatherBinding) {
-        background.set(context?.resources?.getDrawable(R.drawable.bg_weather_default))
+        background.set(context.resources.getDrawable(R.drawable.bg_weather_default))
         updateData()
     }
 
@@ -49,7 +49,7 @@ class WeatherItemViewModel(private val city: String) : BaseItemViewModel<ItemWea
         cityName.set(data.basic?.location)
         temperature.set(data.now?.temperature)
         condition.set(data.now?.conditionTxt)
-        background.set(context?.resources?.getDrawable(WeatherTxt.getCorrespondingBackground(data.now?.conditionTxt!!)))
+        background.set(context.resources.getDrawable(WeatherTxt.getCorrespondingBackground(data.now?.conditionTxt!!)))
     }
 
     private fun updateData() {

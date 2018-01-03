@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
-import io.github.mindjet.liteweather.R
+import android.widget.TextView
 
 /**
  * Created by Mindjet on 2017/10/25.
@@ -26,8 +26,11 @@ class PopupWindowGen private constructor(private val context: Context) {
     var width = 100
     var elevation = 10f
     var listeners: MutableList<Pair<Int, (View) -> Unit>> = mutableListOf()
+    var contents: MutableList<Pair<Int, String>> = mutableListOf()
 
     fun addListener(@IdRes id: Int, callback: (View) -> Unit) = listeners.add(Pair(id, callback))
+
+    fun addContent(@IdRes id: Int, content: String) = contents.add(Pair(id, content))
 
     fun build(): PopupWindow {
         val popupView = LayoutInflater.from(context).inflate(layoutId, null)
@@ -39,6 +42,10 @@ class PopupWindowGen private constructor(private val context: Context) {
         listeners.forEach {
             val view = popupView.findViewById<View>(it.first)
             view.setOnClickListener { v -> it.second(v) }
+        }
+        contents.forEach {
+            val view = popupView.findViewById<TextView>(it.first)
+            view.text = it.second
         }
         return popupWindow
     }

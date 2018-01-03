@@ -19,8 +19,8 @@ import io.github.mindjet.livemvvm.viewmodel.BaseViewModel
 class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
-    private val revealLayout by lazy { binding?.revealLayout }
-    private val recyclerView by lazy { binding?.recyclerView }
+    private val revealLayout by lazy { binding.revealLayout }
+    private val recyclerView by lazy { binding.recyclerView }
 
     override fun onAttached(binding: ActivityMainBinding) {
         initRecyclerView()
@@ -57,7 +57,7 @@ class MainViewModel : BaseViewModel<ActivityMainBinding>() {
 
     private fun initRevealLayout() {
         revealLayout?.config {
-            fromTo(activity!!, SearchActivity::class.java)
+            fromTo(activity, SearchActivity::class.java)
             revealDuration = 300
             fabGravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
             fabIcon = R.mipmap.ic_add
