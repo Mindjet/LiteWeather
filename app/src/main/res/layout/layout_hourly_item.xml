@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="io.github.mindjet.liteweather.viewmodel.HourlyItemViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple_borderless_theme"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:minWidth="100dp"
+        android:orientation="vertical"
+        android:padding="10dp"
+        bind:background="@color/colorBase">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_arrow_back_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.temperature}"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.time}"
+            android:textColor="@android:color/white"
+            bind:text="22:00 | 晴" />
+
+    </LinearLayout>
+</layout>

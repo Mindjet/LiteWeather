@@ -15,7 +15,7 @@
         android:background="@color/colorBase"
         android:elevation="5dp"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
+        android:paddingBottom="5dp"
         android:paddingTop="10dp">
 
         <TextView
@@ -37,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_borderless"
+                android:background="@drawable/ripple_borderless_theme"
                 android:gravity="center"
                 android:onClick="@{(v) -> data.handleItemClick(v, 0)}"
                 android:orientation="vertical"
@@ -63,7 +63,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_borderless"
+                android:background="@drawable/ripple_borderless_theme"
                 android:gravity="center"
                 android:onClick="@{(v) -> data.handleItemClick(v, 1)}"
                 android:orientation="vertical"
@@ -89,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/ripple_borderless"
+                android:background="@drawable/ripple_borderless_theme"
                 android:gravity="center"
                 android:onClick="@{(v) -> data.handleItemClick(v, 2)}"
                 android:orientation="vertical"

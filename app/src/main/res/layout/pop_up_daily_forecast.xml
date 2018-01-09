@@ -3,7 +3,7 @@
     xmlns:bind="http://schemas.android.com/tools"
     android:layout_width="200dp"
     android:layout_height="wrap_content"
-    android:background="@drawable/ripple"
+    android:background="@drawable/ripple_light"
     android:clickable="true"
     android:focusable="true"
     android:orientation="vertical">

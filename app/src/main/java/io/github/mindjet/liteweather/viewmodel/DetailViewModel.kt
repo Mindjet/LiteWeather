@@ -10,7 +10,6 @@ import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.consant.Constant
 import io.github.mindjet.liteweather.consant.WeatherTxt
 import io.github.mindjet.liteweather.databinding.ActivityDetailBinding
-import io.github.mindjet.liteweather.helper.toast
 import io.github.mindjet.liteweather.model.DetailResponse
 import io.github.mindjet.liteweather.network.CommTrans
 import io.github.mindjet.liteweather.network.RetrofitInstance
@@ -34,7 +33,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     private val collapsingLayout by lazy { binding.collapsingLayout }
     private val toolbar by lazy { binding.toolbar }
 
-    private var response: DetailResponse? = null
+    private lateinit var response: DetailResponse
 
     private val adapter by lazy { ListAdapter<BaseItemViewModel<*>>() }
 
@@ -75,6 +74,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
                     response = it
                     updateNowBlock()
                     updateDailyBlock()
+                    updateHourlyBlock()
                 }, { log(it) })
     }
 
@@ -84,15 +84,20 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     }
 
     private fun updateNowBlock() {
-        tempOb.set(response?.now?.temperature)
-        conditionOb.set(response?.now?.conditionTxt)
-        windOb.set("${response?.now?.windDirection}/${response?.now?.windScale}")
-        humidityOb.set("湿度${response?.now?.humidity}%")
+        tempOb.set(response.now.temperature)
+        conditionOb.set(response.now.conditionTxt)
+        windOb.set("${response.now.windDirection}/${response.now.windScale}")
+        humidityOb.set("湿度${response.now.humidity}%")
     }
 
     private fun updateDailyBlock() {
-        adapter.add(UpcomingDailyViewModel(response?.dailyForecast))
+        adapter.add(UpcomingDailyViewModel(response.dailyForecast))
         adapter.notifyItemInserted(0)
+    }
+
+    private fun updateHourlyBlock() {
+        adapter.add(HourlyViewModel(response.hourly))
+        adapter.notifyItemInserted(1)
     }
 
     fun onBack() {
