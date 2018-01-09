@@ -2,6 +2,7 @@ package io.github.mindjet.liteweather.viewmodel
 
 import android.databinding.ObservableField
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.support.v7.widget.LinearLayoutManager
 import io.github.mindjet.library.extension.log
@@ -69,7 +70,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     private fun fetchData() {
         RetrofitInstance.get<WeatherService>()
                 .getDetailWeather(city!!)
-                .compose(CommTrans.asyncSync<DetailResponse>())
+                .compose(CommTrans.asyncSync())
                 .subscribe({
                     response = it
                     updateNowBlock()
@@ -78,21 +79,20 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     }
 
     private fun updateBackground() {
-        val drawableId = WeatherTxt.getCorrespondingBackground(condition!!)
-        background.set(context.resources?.getDrawable(drawableId))
+        val colorRes = WeatherTxt.mapWeatherToColor(condition!!)
+        background.set(ColorDrawable(context.resources.getColor(colorRes)))
     }
 
     private fun updateNowBlock() {
         tempOb.set(response?.now?.temperature)
         conditionOb.set(response?.now?.conditionTxt)
-        windOb.set("${response?.now?.windScale}/${response?.now?.windDirection}")
+        windOb.set("${response?.now?.windDirection}/${response?.now?.windScale}")
         humidityOb.set("湿度${response?.now?.humidity}%")
     }
 
     private fun updateDailyBlock() {
         adapter.add(UpcomingDailyViewModel(response?.dailyForecast))
         adapter.notifyItemInserted(0)
-        toast(adapter.size.toString())
     }
 
     fun onBack() {

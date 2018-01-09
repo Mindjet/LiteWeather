@@ -13,4 +13,7 @@
     <color name="colorOvercast">#336271</color>
     <color name="colorShower">#2c444b</color>
     <color name="colorFoggy">#a1a1a1</color>
+    <color name="colorSunnyInterval">#a3975a</color>
+    <color name="colorMidRainny">#263c43</color>
+    <color name="colorSleet">#485d63</color>
 </resources>

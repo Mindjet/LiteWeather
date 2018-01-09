@@ -9,5 +9,8 @@
     <string name="humidity">湿度</string>
     <string name="wind_speed_direction">风力/风向</string>
     <string name="sunrise_sunset">日出/日落</string>
+    <string name="moonrise_moonset">月生/月落</string>
+    <string name="percentage_of_rain">降雨概率</string>
+    <string name="visibility">能见度</string>
 
 </resources>

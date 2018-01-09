@@ -1,6 +1,7 @@
 package io.github.mindjet.liteweather.viewmodel
 
 import android.databinding.ObservableField
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.view.View
 import io.github.mindjet.library.extension.log
@@ -41,7 +42,7 @@ class WeatherItemViewModel(private val city: String) : BaseItemViewModel<ItemWea
     override fun needLayoutId() = R.layout.item_weather
 
     override fun onAttachedTheFirstTime(binding: ItemWeatherBinding) {
-        background.set(context.resources.getDrawable(R.drawable.bg_weather_default))
+        background.set(ColorDrawable(context.resources.getColor(R.color.colorDefault)))
         updateData()
     }
 
@@ -49,7 +50,7 @@ class WeatherItemViewModel(private val city: String) : BaseItemViewModel<ItemWea
         cityName.set(data.basic?.location)
         temperature.set(data.now?.temperature)
         condition.set(data.now?.conditionTxt)
-        background.set(context.resources.getDrawable(WeatherTxt.getCorrespondingBackground(data.now?.conditionTxt!!)))
+        background.set(ColorDrawable(context.resources.getColor(WeatherTxt.mapWeatherToColor(data.now?.conditionTxt!!))))
     }
 
     private fun updateData() {

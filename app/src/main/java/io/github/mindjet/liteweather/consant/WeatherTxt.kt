@@ -15,15 +15,19 @@ object WeatherTxt {
     const val SHOWER = "阵雨"
     const val SLEET = "雨夹雪"
     const val SUNNY_INTERVAL = "晴间多云"
+    const val MID_RAINNY = "中雨"
 
-    fun getCorrespondingBackground(string: String): Int {
+    fun mapWeatherToColor(string: String): Int {
         return when (string) {
-            SUNNY -> R.drawable.bg_weather_sunny
-            CLOUDY -> R.drawable.bg_weather_cloudy
-            OVERCAST -> R.drawable.bg_weather_overcast
-            FOGGY -> R.drawable.bg_weather_foggy
-            SHOWER -> R.drawable.bg_weather_shower
-            else -> R.drawable.bg_weather_default
+            SUNNY -> R.color.colorSunny
+            CLOUDY -> R.color.colorCloudy
+            OVERCAST, RAINNY -> R.color.colorOvercast
+            FOGGY -> R.color.colorFoggy
+            SHOWER -> R.color.colorShower
+            SUNNY_INTERVAL -> R.color.colorSunnyInterval
+            SLEET -> R.color.colorSleet
+            MID_RAINNY -> R.color.colorMidRainny
+            else -> R.color.colorDefault
         }
     }
 
