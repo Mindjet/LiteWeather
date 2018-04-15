@@ -4,8 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorBase">#0c1a2d</color>
-    <color name="colorBaseLight">#102036</color>
+    <color name="colorBase">#f7f7f7</color>
+    <color name="colorBaseLight">#ffffff</color>
 
     <color name="colorSunny">#ecd555</color>
     <color name="colorCloudy">#4fa0b9</color>
@@ -16,4 +16,6 @@
     <color name="colorSunnyInterval">#a3975a</color>
     <color name="colorMidRainny">#263c43</color>
     <color name="colorSleet">#485d63</color>
+
+    <color name="textColor">#333</color>
 </resources>

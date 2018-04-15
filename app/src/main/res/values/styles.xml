@@ -17,7 +17,7 @@
     </style>
 
     <style name="TextAppearance">
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/textColor</item>
     </style>
 
     <style name="TextAppearance.Collapsed" parent="TextAppearance">

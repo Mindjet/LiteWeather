@@ -50,7 +50,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:text="@{data.tempOb}"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColor"
                             android:textSize="70sp"
                             bind:text="20" />
 
@@ -60,7 +60,7 @@
                             android:layout_alignTop="@id/tv_temperature"
                             android:layout_toEndOf="@id/tv_temperature"
                             android:text="@string/celcius"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColor"
                             android:textSize="40sp" />
 
                         <LinearLayout
@@ -90,7 +90,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="5dp"
                                 android:text="@{data.conditionOb}"
-                                android:textColor="@android:color/white"
+                                android:textColor="@color/textColor"
                                 android:textSize="20sp"
                                 bind:text="多云" />
 
@@ -103,7 +103,7 @@
                             android:layout_below="@id/lly_condition"
                             android:layout_centerHorizontal="true"
                             android:text="@{data.humidityOb}"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColor"
                             android:textSize="15sp"
                             bind:text="70%湿度" />
 
@@ -114,7 +114,7 @@
                             android:layout_below="@id/tv_humidity"
                             android:layout_centerHorizontal="true"
                             android:text="@{data.windOb}"
-                            android:textColor="@android:color/white"
+                            android:textColor="@color/textColor"
                             android:textSize="15sp"
                             bind:text="东北风/微风" />
 

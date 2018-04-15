@@ -57,7 +57,7 @@ class DetailViewModel : BaseViewModel<ActivityDetailBinding>() {
     private fun initCollapsingLayout() {
         collapsingLayout?.setCollapsedTitleTextAppearance(R.style.TextAppearance)
         collapsingLayout?.setExpandedTitleTextAppearance(R.style.TextAppearance_Expend)
-        toolbar?.setTitleTextColor(Color.WHITE)
+        toolbar?.setTitleTextColor(context.resources.getColor(R.color.textColor))
         toolbar?.setNavigationOnClickListener { onBack() }
     }
 

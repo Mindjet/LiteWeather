@@ -24,7 +24,7 @@
             android:paddingEnd="10dp"
             android:paddingStart="10dp"
             android:text="@string/realtime_weather"
-            android:textColor="@android:color/white"
+            android:textColor="@color/textColor"
             android:textSize="@dimen/common_item_title_text_size" />
 
         <View
