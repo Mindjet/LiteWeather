@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="common_card_radius">5dp</dimen>
-    <dimen name="common_card_elevation">5dp</dimen>
-
-
-    <dimen name="common_item_title_text_size">17sp</dimen>
-</resources>
