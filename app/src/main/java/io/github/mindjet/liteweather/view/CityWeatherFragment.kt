@@ -39,15 +39,16 @@ class CityWeatherFragment : Fragment() {
     }
 
     private fun createFreshView(inflater: LayoutInflater, container: ViewGroup?): View? {
+        //TODO extract this annoying coupled logic
         val view = inflater.inflate(R.layout.fragment_city, container, false)
         val city = arguments?.getString(Constant.BUNDLE_CITY)
         HeWeather.getWeatherNow(container?.context, city, object : HeWeather.OnResultWeatherNowBeanListener {
             override fun onSuccess(now: MutableList<Now>?) {
                 val data = now?.get(0)
                 view.apply {
-                    tvTemperature.text = data?.now?.tmp
+                    tvTemperature.text = resources.getString(R.string.degree_celsius_unit, data?.now?.tmp)
                     tvCondition.text = data?.now?.cond_txt
-                    tvFeelingTemperature.text = data?.now?.fl
+                    tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, data?.now?.fl)
                     mask1.visibility = View.INVISIBLE
                     mask2.visibility = View.INVISIBLE
                 }

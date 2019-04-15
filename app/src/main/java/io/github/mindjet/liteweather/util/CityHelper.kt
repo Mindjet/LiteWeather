@@ -1,4 +1,4 @@
-package io.github.mindjet.liteweather
+package io.github.mindjet.liteweather.util
 
 import android.content.Context
 
@@ -10,7 +10,8 @@ class CityHelper {
         @Synchronized
         fun getInstance(): CityHelper? {
             if (instance == null) {
-                instance = CityHelper()
+                instance =
+                    CityHelper()
             }
             return instance
         }
