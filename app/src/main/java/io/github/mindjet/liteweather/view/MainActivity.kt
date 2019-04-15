@@ -1,7 +1,9 @@
-package io.github.mindjet.liteweather
+package io.github.mindjet.liteweather.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
+import io.github.mindjet.liteweather.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
