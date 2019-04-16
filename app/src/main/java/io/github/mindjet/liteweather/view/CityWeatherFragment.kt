@@ -10,6 +10,7 @@ import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.constant.Constant
+import io.github.mindjet.liteweather.util.conditionColor
 import kotlinx.android.synthetic.main.include_basic_info.view.*
 
 class CityWeatherFragment : Fragment() {
@@ -44,11 +45,12 @@ class CityWeatherFragment : Fragment() {
         val city = arguments?.getString(Constant.BUNDLE_CITY)
         HeWeather.getWeatherNow(container?.context, city, object : HeWeather.OnResultWeatherNowBeanListener {
             override fun onSuccess(now: MutableList<Now>?) {
-                val data = now?.get(0)
+                val data = now?.get(0)!!
                 view.apply {
-                    tvTemperature.text = resources.getString(R.string.degree_celsius_unit, data?.now?.tmp)
-                    tvCondition.text = data?.now?.cond_txt
-                    tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, data?.now?.fl)
+                    clWrapper.setBackgroundResource(data.now.cond_code?.conditionColor()!!)
+                    tvTemperature.text = resources.getString(R.string.degree_celsius_unit, data.now.tmp)
+                    tvCondition.text = data.now.cond_txt
+                    tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, data.now.fl)
                     mask1.visibility = View.INVISIBLE
                     mask2.visibility = View.INVISIBLE
                 }

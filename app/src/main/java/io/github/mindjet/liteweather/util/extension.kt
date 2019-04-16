@@ -1,5 +1,5 @@
 package io.github.mindjet.liteweather.util
 
-infix fun String?.append(content: String): String {
-    return this + content
+fun String.conditionColor(): Int {
+    return ConditionHelper.getConditionColor(this)
 }

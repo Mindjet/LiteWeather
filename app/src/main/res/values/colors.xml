@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="condition_sunny">#FFE32A</color>
+    <color name="condition_overcast">#AEAEAE</color>
+    <color name="condition_rainy">#19848C</color>
+    <color name="condition_cloudy">#2C6D9D</color>
+    <color name="condition_windy">#22A46A</color>
+    <color name="condition_muggy">#BFBB7C</color>
 </resources>
