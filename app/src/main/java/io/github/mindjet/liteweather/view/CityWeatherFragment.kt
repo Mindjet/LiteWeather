@@ -2,11 +2,10 @@ package io.github.mindjet.liteweather.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now
+import com.bumptech.glide.Glide
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.constant.Constant
@@ -52,6 +51,9 @@ class CityWeatherFragment : Fragment() {
                 tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, it.now?.fl)
                 mask1.visibility = View.INVISIBLE
                 mask2.visibility = View.INVISIBLE
+                Glide.with(ivCondition)
+                    .load("https://cdn.heweather.com/cond_icon/${it.now?.cond_code}.png")
+                    .into(ivCondition)
             }
         })
         return view
