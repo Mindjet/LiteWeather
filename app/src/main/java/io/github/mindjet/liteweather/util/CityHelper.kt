@@ -18,7 +18,7 @@ class CityHelper {
     }
 
     fun getPinnedCities(ctx: Context): ArrayList<String> {
-        return arrayListOf("北京市", "深圳市", "佳木斯", "银川市")
+        return arrayListOf("深圳市")
     }
 
 }

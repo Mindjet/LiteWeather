@@ -10,6 +10,7 @@ import interfaces.heweather.com.interfacesmodule.bean.weather.now.Now
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.constant.Constant
+import io.github.mindjet.liteweather.listener.ComListener
 import io.github.mindjet.liteweather.util.conditionColor
 import kotlinx.android.synthetic.main.include_basic_info.view.*
 
@@ -43,21 +44,14 @@ class CityWeatherFragment : Fragment() {
         //TODO extract this annoying coupled logic
         val view = inflater.inflate(R.layout.fragment_city, container, false)
         val city = arguments?.getString(Constant.BUNDLE_CITY)
-        HeWeather.getWeatherNow(container?.context, city, object : HeWeather.OnResultWeatherNowBeanListener {
-            override fun onSuccess(now: MutableList<Now>?) {
-                val data = now?.get(0)!!
-                view.apply {
-                    clWrapper.setBackgroundResource(data.now.cond_code?.conditionColor()!!)
-                    tvTemperature.text = resources.getString(R.string.degree_celsius_unit, data.now.tmp)
-                    tvCondition.text = data.now.cond_txt
-                    tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, data.now.fl)
-                    mask1.visibility = View.INVISIBLE
-                    mask2.visibility = View.INVISIBLE
-                }
-            }
-
-            override fun onError(p0: Throwable?) {
-                Log.e("zz", p0?.message)
+        HeWeather.getWeatherNow(container?.context, city, ComListener.nowWeather {
+            view.apply {
+                clWrapper.setBackgroundResource(it?.now?.cond_code?.conditionColor()!!)
+                tvTemperature.text = resources.getString(R.string.degree_celsius_unit, it.now?.tmp)
+                tvCondition.text = it.now?.cond_txt
+                tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, it.now?.fl)
+                mask1.visibility = View.INVISIBLE
+                mask2.visibility = View.INVISIBLE
             }
         })
         return view
