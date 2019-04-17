@@ -5,12 +5,12 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.listener.ComListener
 import io.github.mindjet.liteweather.util.conditionColor
+import io.github.mindjet.liteweather.util.load
 import kotlinx.android.synthetic.main.include_basic_info.view.*
 
 class CityWeatherFragment : Fragment() {
@@ -51,9 +51,7 @@ class CityWeatherFragment : Fragment() {
                 tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, it.now?.fl)
                 mask1.visibility = View.INVISIBLE
                 mask2.visibility = View.INVISIBLE
-                Glide.with(ivCondition)
-                    .load("https://cdn.heweather.com/cond_icon/${it.now?.cond_code}.png")
-                    .into(ivCondition)
+                ivCondition.load("${Constant.CONDITION_ICON_URL_PREFIX}${it.now?.cond_code}.png")
             }
         })
         return view
