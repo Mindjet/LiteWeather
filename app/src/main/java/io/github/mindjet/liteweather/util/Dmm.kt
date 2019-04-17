@@ -1,0 +1,1 @@
+package io.github.mindjet.liteweather.util

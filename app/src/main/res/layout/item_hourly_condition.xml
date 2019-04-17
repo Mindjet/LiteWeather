@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/tvTemperatureItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        bind:text="21℃" />
+
+    <TextView
+        android:id="@+id/tvPossibilityRainy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        bind:text="30%" />
+
+    <ImageView
+        android:id="@+id/ivConditionItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        bind:text="13:00" />
+
+</LinearLayout>
