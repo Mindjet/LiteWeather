@@ -11,4 +11,6 @@
     <color name="condition_cloudy">#2C6D9D</color>
     <color name="condition_windy">#22A46A</color>
     <color name="condition_muggy">#BFBB7C</color>
+
+    <color name="textColor">#313131</color>
 </resources>

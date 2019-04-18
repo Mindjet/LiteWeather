@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">LiteWeather</string>
 
+    <string name="every_3_hour_condition">每3小时天气情况</string>
+
     <string name="degree_celsius_unit">%s℃</string>
     <string name="feeling_temperature_prefix">体感温度：%s℃</string>
+    <string name="possibility_of_rain">降水量：%s</string>
+    <string name="humidity">相对湿度：%s%%</string>
 </resources>

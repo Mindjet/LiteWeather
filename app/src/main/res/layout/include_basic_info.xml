@@ -40,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="@id/tvTemperature"
             app:layout_constraintLeft_toLeftOf="@id/tvTemperature"
             app:layout_constraintTop_toTopOf="@id/tvTemperature"
@@ -78,6 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:cardCornerRadius="6dp"
+            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="@id/tvFeelingTemperature"
             app:layout_constraintLeft_toLeftOf="@id/tvFeelingTemperature"
             app:layout_constraintTop_toTopOf="@id/tvFeelingTemperature"
@@ -89,6 +91,26 @@
                 android:background="#cccccc" />
 
         </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvPossibilityRainy"
+            style="@style/TextStyle.FeelingTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            app:layout_constraintLeft_toLeftOf="@id/tvFeelingTemperature"
+            app:layout_constraintTop_toBottomOf="@id/tvFeelingTemperature"
+            bind:text="降雨概率：10%" />
+
+        <TextView
+            android:id="@+id/tvHumidity"
+            style="@style/TextStyle.FeelingTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintLeft_toRightOf="@+id/tvPossibilityRainy"
+            app:layout_constraintTop_toTopOf="@id/tvPossibilityRainy"
+            bind:text="相对湿度：30" />
 
 
     </android.support.constraint.ConstraintLayout>

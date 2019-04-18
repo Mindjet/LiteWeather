@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import interfaces.heweather.com.interfacesmodule.bean.grid.hourly.GridHourly
-import interfaces.heweather.com.interfacesmodule.bean.weather.Weather
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.HourlyConditionAdapter
@@ -81,6 +79,8 @@ class CityWeatherFragment : Fragment() {
                     tvTemperature.text = resources.getString(R.string.degree_celsius_unit, it.tmp)
                     tvCondition.text = it.cond_txt
                     tvFeelingTemperature.text = resources.getString(R.string.feeling_temperature_prefix, it.fl)
+                    tvPossibilityRainy.text = resources.getString(R.string.possibility_of_rain, it.pcpn)
+                    tvHumidity.text = resources.getString(R.string.humidity, it.hum)
                     mask1.visibility = View.INVISIBLE
                     mask2.visibility = View.INVISIBLE
                     ivCondition.load("${Constant.CONDITION_ICON_URL_PREFIX}${it.cond_code}.png")
@@ -90,11 +90,11 @@ class CityWeatherFragment : Fragment() {
                 view.apply {
                     recyclerView.adapter = HourlyConditionAdapter(it) {
                         tvTemperatureItem.text = resources.getString(R.string.degree_celsius_unit, it?.tmp)
-                        tvPossibilityRainy.text = "${it?.pop}%"
+                        tvPossibilityRainyItem.text = "${it?.pop}%"
                         ivConditionItem.load("${Constant.CONDITION_ICON_URL_PREFIX}${it?.cond_code}.png")
-                        tvTime.text = it?.time
+                        tvTime.text = it?.time!!.split(" ")[1]
                     }
-                    recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     (recyclerView.adapter as HourlyConditionAdapter).notifyDataSetChanged()
                 }
             }
