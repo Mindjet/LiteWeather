@@ -28,7 +28,7 @@
     </style>
 
     <style name="TextStyle.FeelingTemperature" parent="TextStyle">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

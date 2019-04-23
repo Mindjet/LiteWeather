@@ -7,4 +7,7 @@
     <string name="feeling_temperature_prefix">体感温度：%s℃</string>
     <string name="possibility_of_rain">降水量：%s</string>
     <string name="humidity">相对湿度：%s%%</string>
+
+    <string name="loading">载入中…</string>
+    <string name="load_failed">载入失败</string>
 </resources>

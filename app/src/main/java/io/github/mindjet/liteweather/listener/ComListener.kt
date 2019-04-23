@@ -10,31 +10,41 @@ import interfaces.heweather.com.interfacesmodule.view.HeWeather
 
 object ComListener {
 
-    const val TAG = "ComListener"
+    private const val TAG = "ComListener"
 
     fun wholeWeather(
         nowBody: (now: NowBase?) -> Unit,
-        hourlyBody: (hourly: List<HourlyBase>) -> Unit
+        hourlyBody: (hourly: List<HourlyBase>) -> Unit,
+        onSuccess: () -> Unit = {},
+        onError: (t: Throwable?) -> Unit = {}
     ): HeWeather.OnResultWeatherDataListBeansListener {
         return object : HeWeather.OnResultWeatherDataListBeansListener {
             override fun onSuccess(data: MutableList<Weather>?) {
+                onSuccess.invoke()
                 if (data == null) {
                     onError(Throwable("response is null"))
                     return
                 }
                 nowBody.invoke(data[0].now)
-                if (data[0].hourly == null) {
-                    onError(Throwable("hourly data is null"))
-                    return
+                if (checkIfNull(data[0].hourly)) {
+                    hourlyBody.invoke(data[0].hourly)
                 }
-                hourlyBody.invoke(data[0].hourly)
             }
 
             override fun onError(t: Throwable?) {
+                onError.invoke(t)
                 handleError(t)
             }
 
         }
+    }
+
+    fun checkIfNull(o: Any?): Boolean {
+        if (o == null) {
+            handleError(Throwable("data is null"))
+            return false
+        }
+        return true
     }
 
     fun nowWeather(body: (now: Now?) -> Unit): HeWeather.OnResultWeatherNowBeanListener {

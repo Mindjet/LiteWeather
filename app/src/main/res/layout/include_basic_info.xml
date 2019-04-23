@@ -8,110 +8,90 @@
     app:cardCornerRadius="6dp"
     app:cardElevation="5dp">
 
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/clWrapper"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/ivCondition"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="10dp"
-            android:tint="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="@id/tvCondition"
-            app:layout_constraintRight_toLeftOf="@id/tvCondition"
-            app:layout_constraintTop_toTopOf="@id/tvCondition" />
-
-        <TextView
-            android:id="@+id/tvTemperature"
-            style="@style/TextStyle.Temperature"
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clWrapper"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:text="25℃" />
+            android:background="@android:color/darker_gray"
+            android:padding="20dp">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/mask1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/tvTemperature"
-            app:layout_constraintLeft_toLeftOf="@id/tvTemperature"
-            app:layout_constraintTop_toTopOf="@id/tvTemperature"
-            bind:visibility="invisible">
+            <ImageView
+                android:id="@+id/ivCondition"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:tint="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="@id/tvCondition"
+                app:layout_constraintRight_toLeftOf="@id/tvCondition"
+                app:layout_constraintTop_toTopOf="@id/tvCondition" />
 
-            <View
-                android:layout_width="80dp"
-                android:layout_height="30dp"
-                android:background="#CCCCCC" />
+            <TextView
+                android:id="@+id/tvTemperature"
+                style="@style/TextStyle.Temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:text="25℃" />
 
-        </android.support.v7.widget.CardView>
+            <TextView
+                android:id="@+id/tvCondition"
+                style="@style/TextStyle.Temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="200dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                bind:text="晴" />
 
+            <TextView
+                android:id="@+id/tvFeelingTemperature"
+                style="@style/TextStyle.FeelingTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTemperature"
+                bind:text="体感温度：xxx" />
 
-        <TextView
-            android:id="@+id/tvCondition"
-            style="@style/TextStyle.Temperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxWidth="200dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:text="晴" />
+            <TextView
+                android:id="@+id/tvPossibilityRainy"
+                style="@style/TextStyle.FeelingTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                app:layout_constraintLeft_toLeftOf="@id/tvFeelingTemperature"
+                app:layout_constraintTop_toBottomOf="@id/tvFeelingTemperature"
+                bind:text="降雨概率：10%" />
 
-        <TextView
-            android:id="@+id/tvFeelingTemperature"
-            style="@style/TextStyle.FeelingTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvTemperature"
-            bind:text="体感温度：xxx" />
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/mask2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="6dp"
-            app:cardElevation="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/tvFeelingTemperature"
-            app:layout_constraintLeft_toLeftOf="@id/tvFeelingTemperature"
-            app:layout_constraintTop_toTopOf="@id/tvFeelingTemperature"
-            bind:visibility="invisible">
-
-            <View
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:background="#cccccc" />
-
-        </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/tvPossibilityRainy"
-            style="@style/TextStyle.FeelingTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintLeft_toLeftOf="@id/tvFeelingTemperature"
-            app:layout_constraintTop_toBottomOf="@id/tvFeelingTemperature"
-            bind:text="降雨概率：10%" />
-
-        <TextView
-            android:id="@+id/tvHumidity"
-            style="@style/TextStyle.FeelingTemperature"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintLeft_toRightOf="@+id/tvPossibilityRainy"
-            app:layout_constraintTop_toTopOf="@id/tvPossibilityRainy"
-            bind:text="相对湿度：30" />
+            <TextView
+                android:id="@+id/tvHumidity"
+                style="@style/TextStyle.FeelingTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvPossibilityRainy"
+                app:layout_constraintTop_toTopOf="@id/tvPossibilityRainy"
+                bind:text="相对湿度：30" />
 
 
-    </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+
+        <include
+            android:id="@+id/includeLoadingBasicInfo"
+            layout="@layout/include_loading"
+            bind:visibility="gone" />
+
+        <include
+            android:id="@+id/includeLoadFailedBasicInfo"
+            layout="@layout/include_load_failed"
+            bind:visibility="gone" />
+
+    </FrameLayout>
+
+
 </android.support.v7.widget.CardView>

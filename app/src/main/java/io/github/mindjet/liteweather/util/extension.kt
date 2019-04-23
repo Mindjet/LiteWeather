@@ -1,5 +1,6 @@
 package io.github.mindjet.liteweather.util
 
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 
@@ -12,3 +13,9 @@ fun ImageView.load(url: String) {
         .load(url)
         .into(this)
 }
+
+infix fun View.turnTo(state: Int) {
+    this.visibility = state
+}
+
+//https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn
