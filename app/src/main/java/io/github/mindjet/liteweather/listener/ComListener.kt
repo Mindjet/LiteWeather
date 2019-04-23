@@ -1,6 +1,8 @@
 package io.github.mindjet.liteweather.listener
 
 import android.util.Log
+import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
+import interfaces.heweather.com.interfacesmodule.bean.search.Search
 import interfaces.heweather.com.interfacesmodule.bean.weather.Weather
 import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.Hourly
 import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase
@@ -34,6 +36,19 @@ object ComListener {
             override fun onError(t: Throwable?) {
                 onError.invoke(t)
                 handleError(t)
+            }
+
+        }
+    }
+
+    fun citySearch(body: (cities: List<Basic>?) -> Unit): HeWeather.OnResultSearchBeansListener {
+        return object : HeWeather.OnResultSearchBeansListener {
+            override fun onSuccess(city: Search?) {
+                body.invoke(city?.basic)
+            }
+
+            override fun onError(p0: Throwable?) {
+                handleError(p0)
             }
 
         }
