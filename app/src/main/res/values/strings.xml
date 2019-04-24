@@ -10,4 +10,6 @@
 
     <string name="loading">载入中…</string>
     <string name="load_failed">载入失败</string>
+
+    <string name="search_city">搜索城市</string>
 </resources>
