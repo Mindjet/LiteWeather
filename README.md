@@ -2,4 +2,6 @@
 
 # Screenshot
 
-![demo1](./art/demo1.png)
+![home](./art/home.png)
+
+![search](./art/search.png)
