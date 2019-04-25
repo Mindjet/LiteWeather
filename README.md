@@ -2,6 +2,7 @@
 
 # Screenshot
 
-![home](./art/home.png)
+<img src="./art/home.png" width="400" />
 
-![search](./art/search.png)
+
+<img src="./art/search.png" width="400" />
