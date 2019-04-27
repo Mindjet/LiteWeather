@@ -91,7 +91,7 @@ object ComListener {
     }
 
     private fun handleError(t: Throwable?) {
-        Log.e(TAG, t?.message)
+        Log.e(TAG, "${t?.message} ${t.toString()}")
     }
 
 }

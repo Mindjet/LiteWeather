@@ -4,18 +4,27 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
+import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
+import io.github.mindjet.liteweather.util.PubSub
 import io.github.mindjet.liteweather.util.goto
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var subscription: PubSub.Subscription
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initViewPager()
         initFab()
+
+        subscription = PubSub.getInstance().subscribe<Basic>("add_city") {
+            Log.e("tag", "${it.location} ${it.cid}")
+        }
     }
 
     private fun initViewPager() {
@@ -37,4 +46,10 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener { this@MainActivity goto CitySearchActivity::class.java }
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        subscription.unsubscribe()
+    }
+
 }

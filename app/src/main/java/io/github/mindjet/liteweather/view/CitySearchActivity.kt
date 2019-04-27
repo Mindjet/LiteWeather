@@ -23,7 +23,7 @@ class CitySearchActivity : AppCompatActivity() {
                 HeWeather.getSearch(
                     this@CitySearchActivity,
                     v.text.toString(),
-                    "world",
+                    "CN",
                     10,
                     Lang.CHINESE_SIMPLIFIED,
                     ComListener.citySearch {

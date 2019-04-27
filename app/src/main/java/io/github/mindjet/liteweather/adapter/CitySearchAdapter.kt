@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
-import io.github.mindjet.liteweather.util.turnTo
+import io.github.mindjet.liteweather.util.PubSub
 import kotlinx.android.synthetic.main.item_city_search.view.*
 
 class CitySearchAdapter(
@@ -24,7 +24,12 @@ class CitySearchAdapter(
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     override fun onBindViewHolder(viewHolder: CitySearchVH, index: Int) {
-        viewHolder.itemView.apply { tvCity.text = "${data?.get(index)?.location}, ${data?.get(index)?.admin_area}" }
+        viewHolder.itemView.apply {
+            tvCity.text = "${data?.get(index)?.location}, ${data?.get(index)?.admin_area}"
+            flyCityWrapper.setOnClickListener {
+                PubSub.getInstance().publish("add_city", data?.get(index))
+            }
+        }
     }
 
 
