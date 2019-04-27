@@ -41,7 +41,10 @@ object ComListener {
         }
     }
 
-    fun citySearch(body: (cities: List<Basic>?) -> Unit): HeWeather.OnResultSearchBeansListener {
+    fun citySearch(
+        body: (cities: List<Basic>?) -> Unit,
+        onError: (t: Throwable?) -> Unit = {}
+    ): HeWeather.OnResultSearchBeansListener {
         return object : HeWeather.OnResultSearchBeansListener {
             override fun onSuccess(city: Search?) {
                 body.invoke(city?.basic)
@@ -49,6 +52,8 @@ object ComListener {
 
             override fun onError(p0: Throwable?) {
                 handleError(p0)
+                parseErrorMessage(p0?.message)
+                onError.invoke(p0)
             }
 
         }
@@ -92,6 +97,11 @@ object ComListener {
 
     private fun handleError(t: Throwable?) {
         Log.e(TAG, "${t?.message} ${t.toString()}")
+    }
+
+    private fun parseErrorMessage(message: String?) {
+        val code = message?.substring(message.indexOf('[') + 1, message.indexOf(']'))?.trim()
+        Log.e("tag", code)
     }
 
 }

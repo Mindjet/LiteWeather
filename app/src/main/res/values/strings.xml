@@ -12,4 +12,5 @@
     <string name="load_failed">载入失败</string>
 
     <string name="search_city">搜索城市</string>
+    <string name="no_city_found">无搜索结果</string>
 </resources>
