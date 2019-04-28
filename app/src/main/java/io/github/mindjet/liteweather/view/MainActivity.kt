@@ -4,10 +4,10 @@ import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
+import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.PubSub
 import io.github.mindjet.liteweather.util.goto
 import kotlinx.android.synthetic.main.activity_main.*
@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var subscription: PubSub.Subscription
+    private lateinit var adapter: CityViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,13 +23,12 @@ class MainActivity : AppCompatActivity() {
         initViewPager()
         initFab()
 
-        subscription = PubSub.getInstance().subscribe<Basic>("add_city") {
-            Log.e("tag", "${it.location} ${it.cid}")
-        }
+        subscription = PubSub.getInstance().subscribe<Basic>("add_city") { adapter.addItem(City(it.location, it.cid)) }
     }
 
     private fun initViewPager() {
-        viewPager.adapter = CityViewPagerAdapter(this, supportFragmentManager)
+        adapter = CityViewPagerAdapter(this, supportFragmentManager)
+        viewPager.adapter = adapter
         val white = resources.getColor(android.R.color.white)
         tabLayout.apply {
             setupWithViewPager(viewPager)

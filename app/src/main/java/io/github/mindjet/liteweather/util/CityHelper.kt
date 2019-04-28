@@ -1,6 +1,7 @@
 package io.github.mindjet.liteweather.util
 
 import android.content.Context
+import io.github.mindjet.liteweather.model.City
 
 class CityHelper {
 
@@ -17,8 +18,8 @@ class CityHelper {
         }
     }
 
-    fun getPinnedCities(ctx: Context): ArrayList<String> {
-        return arrayListOf("深圳市")
+    fun getPinnedCities(ctx: Context): ArrayList<City> {
+        return arrayListOf(City("深圳", "1"))
     }
 
 }
