@@ -27,7 +27,7 @@
             android:paddingRight="20dp"
             android:paddingBottom="20dp"
             android:textColor="@color/textColor"
-            android:textSize="18sp"
+            android:textSize="16sp"
             bind:text="广州市, 广东省" />
 
     </FrameLayout>

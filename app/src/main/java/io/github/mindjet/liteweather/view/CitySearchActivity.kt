@@ -11,6 +11,7 @@ import interfaces.heweather.com.interfacesmodule.view.HeWeather
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CitySearchAdapter
 import io.github.mindjet.liteweather.listener.ComListener
+import io.github.mindjet.liteweather.util.giveupFocus
 import io.github.mindjet.liteweather.util.turnTo
 import kotlinx.android.synthetic.main.activity_city_search.*
 
@@ -20,26 +21,28 @@ class CitySearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_search)
 
+        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        etInput.requestFocus()
+        etInput.findFocus()
+
         etInput.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                giveupFocus()
+                recyclerView turnTo View.INVISIBLE
                 HeWeather.getSearch(
                     this@CitySearchActivity,
                     v.text.toString(),
                     "CN",
-                    10,
+                    20,
                     Lang.CHINESE_SIMPLIFIED,
                     ComListener.citySearch(
                         {
                             recyclerView.adapter = CitySearchAdapter(it)
-                            recyclerView.layoutManager =
-                                LinearLayoutManager(this@CitySearchActivity, RecyclerView.VERTICAL, false)
                             (recyclerView.adapter as CitySearchAdapter).notifyDataSetChanged()
-                            cvNoCity turnTo View.GONE
                             recyclerView turnTo View.VISIBLE
                         },
                         {
-                            cvNoCity turnTo View.VISIBLE
-                            recyclerView turnTo View.GONE
+
                         })
                 )
                 return@setOnEditorActionListener true
