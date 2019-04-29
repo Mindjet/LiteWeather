@@ -1,7 +1,6 @@
 package io.github.mindjet.liteweather.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
@@ -15,7 +14,7 @@ import io.github.mindjet.liteweather.util.giveupFocus
 import io.github.mindjet.liteweather.util.turnTo
 import kotlinx.android.synthetic.main.activity_city_search.*
 
-class CitySearchActivity : AppCompatActivity() {
+class CitySearchActivity : BaseAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

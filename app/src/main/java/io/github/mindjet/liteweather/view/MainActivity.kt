@@ -3,16 +3,16 @@ package io.github.mindjet.liteweather.view
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.PubSub
 import io.github.mindjet.liteweather.util.goto
+import io.github.mindjet.liteweather.util.killTopActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseAppCompatActivity() {
 
     private lateinit var subscription: PubSub.Subscription
     private lateinit var adapter: CityViewPagerAdapter
@@ -23,7 +23,11 @@ class MainActivity : AppCompatActivity() {
         initViewPager()
         initFab()
 
-        subscription = PubSub.getInstance().subscribe<Basic>("add_city") { adapter.addItem(City(it.location, it.cid)) }
+        subscription = PubSub.getInstance().subscribe<Basic>("add_city") {
+            adapter.addItem(City(it.location, it.cid))
+            killTopActivity()
+            viewPager.currentItem = adapter.count - 1
+        }
     }
 
     private fun initViewPager() {

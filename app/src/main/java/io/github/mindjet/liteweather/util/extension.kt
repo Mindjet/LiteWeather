@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 
 val handler = Handler()
+var activities = mutableListOf<AppCompatActivity>()
 
 fun String.conditionColor(): Int {
     return ConditionHelper.getConditionColor(this)
@@ -36,6 +38,19 @@ fun Activity.giveupFocus() {
 
 fun Any.runDelay(millisecond: Long, body: () -> Unit) {
     handler.postDelayed(body, millisecond)
+}
+
+fun AppCompatActivity.register() {
+    activities.add(this)
+}
+
+fun AppCompatActivity.unregister() {
+    activities = activities.filter { it != this } as MutableList<AppCompatActivity>
+}
+
+fun Any.killTopActivity() {
+    activities[activities.size - 1].finish()
+    activities = activities.subList(0, activities.size - 1)
 }
 
 //https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn
