@@ -53,4 +53,16 @@ fun Any.killTopActivity() {
     activities = activities.subList(0, activities.size - 1)
 }
 
+fun Any.checkTrue(condition: Boolean?, job: () -> Unit) {
+    if (condition != null && condition) {
+        job.invoke()
+    }
+}
+
+fun Any.checkFalse(condition: Boolean?, job: () -> Unit) {
+    if (condition != null && !condition) {
+        job.invoke()
+    }
+}
+
 //https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn
