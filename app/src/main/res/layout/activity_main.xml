@@ -25,6 +25,19 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
+            <ImageView
+                android:id="@+id/ivSetting"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginRight="10dp"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_setting"
+                tools:targetApi="lollipop" />
+
         </FrameLayout>
 
         <android.support.design.widget.TabLayout

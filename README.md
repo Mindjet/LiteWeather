@@ -1,7 +1,7 @@
 # LiteWeather
 
-# Screenshot
+[**The app is available here.**](https://www.pgyer.com/ZgxT)
+
+## Screenshot
 
 ![](./art/home.png)
-
-<img src="./art/search.png" width="400" />
