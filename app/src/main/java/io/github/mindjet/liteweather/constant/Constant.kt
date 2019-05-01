@@ -6,4 +6,5 @@ object Constant {
 
     const val CONDITION_ICON_URL_PREFIX = "https://cdn.heweather.com/cond_icon/"
 
+    const val SIGNAL_ADD_CITY = "signal_add_city"
 }

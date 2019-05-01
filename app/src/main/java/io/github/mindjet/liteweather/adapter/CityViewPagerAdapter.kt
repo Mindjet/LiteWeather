@@ -10,23 +10,23 @@ import io.github.mindjet.liteweather.view.CityWeatherFragment
 
 class CityViewPagerAdapter(context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    private var mPinnedCity: MutableList<City> = CityHelper.getInstance()?.getPinnedCities(context)!!
+    private var pinnedCities: MutableList<City>? = CityHelper.getPinnedCities(context)
 
     fun addItem(city: City) {
-        mPinnedCity.add(city)
+        pinnedCities?.add(city)
         notifyDataSetChanged()
     }
 
     override fun getItem(index: Int): Fragment {
-        return CityWeatherFragment.newInstance(mPinnedCity[index].name, mPinnedCity[index].code)
+        return CityWeatherFragment.newInstance(pinnedCities?.get(index)?.name, pinnedCities?.get(index)?.code)
     }
 
     override fun getCount(): Int {
-        return mPinnedCity.size
+        return pinnedCities?.size ?: 0
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return mPinnedCity[position].name
+        return pinnedCities?.get(position)?.name
     }
 
 }

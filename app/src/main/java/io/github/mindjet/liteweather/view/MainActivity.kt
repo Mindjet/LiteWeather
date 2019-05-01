@@ -6,10 +6,9 @@ import android.os.Bundle
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
+import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.model.City
-import io.github.mindjet.liteweather.util.PubSub
-import io.github.mindjet.liteweather.util.goto
-import io.github.mindjet.liteweather.util.killTopActivity
+import io.github.mindjet.liteweather.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseAppCompatActivity() {
@@ -23,10 +22,15 @@ class MainActivity : BaseAppCompatActivity() {
         initViewPager()
         initFab()
 
-        subscription = PubSub.getInstance().subscribe<Basic>("add_city") {
-            adapter.addItem(City(it.location, it.cid))
-            killTopActivity()
-            viewPager.currentItem = adapter.count - 1
+        //response to city add operation
+        subscription = PubSub.getInstance().subscribe<Basic>(Constant.SIGNAL_ADD_CITY) {
+            if (CityHelper.addCity(this, it)) {
+                adapter.addItem(City(it.location, it.cid))
+                killTopActivity()
+                viewPager.currentItem = adapter.count - 1
+            } else {
+                showToast(R.string.city_exist)
+            }
         }
     }
 

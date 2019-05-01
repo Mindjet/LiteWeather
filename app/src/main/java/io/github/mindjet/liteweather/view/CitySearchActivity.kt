@@ -49,7 +49,7 @@ class CitySearchActivity : BaseAppCompatActivity() {
                         },
                         {
                             showToast(R.string.no_city_found)
-                            loadingDialog?.hide()
+                            loadingDialog?.dismiss()
                         })
                 )
                 return@setOnEditorActionListener true

@@ -13,4 +13,5 @@
 
     <string name="search_city">搜索城市</string>
     <string name="no_city_found">无搜索结果</string>
+    <string name="city_exist">城市已存在</string>
 </resources>

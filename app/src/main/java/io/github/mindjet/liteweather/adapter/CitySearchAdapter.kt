@@ -8,10 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
-import io.github.mindjet.liteweather.util.CityHelper
+import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.util.PubSub
-import io.github.mindjet.liteweather.util.checkFalse
-import io.github.mindjet.liteweather.util.checkTrue
 import kotlinx.android.synthetic.main.item_city_search.view.*
 
 class CitySearchAdapter(
@@ -31,11 +29,7 @@ class CitySearchAdapter(
             val city = data?.get(index)
             tvCity.text = "${city?.location}, ${city?.admin_area}"
             flyCityWrapper.setOnClickListener {
-                checkFalse(
-                    CityHelper.getInstance()?.isCityAlreadyPinned(city)
-                ) {
-                    PubSub.getInstance().publish("add_city", city)
-                }
+                PubSub.getInstance().publish(Constant.SIGNAL_ADD_CITY, city)
             }
         }
     }

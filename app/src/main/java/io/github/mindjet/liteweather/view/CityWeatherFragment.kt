@@ -27,7 +27,7 @@ class CityWeatherFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private var cityName: String? = null
 
     companion object {
-        fun newInstance(city: String, code: String): CityWeatherFragment {
+        fun newInstance(city: String?, code: String?): CityWeatherFragment {
             val bundle = Bundle()
             bundle.putString(Constant.BUNDLE_CITY, city)
             bundle.putString(Constant.BUNDLE_CODE, code)

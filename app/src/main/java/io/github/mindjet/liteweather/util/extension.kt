@@ -11,7 +11,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.github.mindjet.liteweather.R
+import java.lang.reflect.Type
+
+const val CONFIG = "config"
 
 val handler = Handler()
 var activities = mutableListOf<AppCompatActivity>()
@@ -83,5 +88,21 @@ fun Context.showToast(contentId: Int) {
 
 fun Context.showToast(content: Any) {
     Toast.makeText(this, content.toString(), Toast.LENGTH_SHORT).show()
+}
+
+fun <T> Context.saveConfigList(key: String, value: MutableList<T>?) {
+    val editor = this.getSharedPreferences(CONFIG, Context.MODE_PRIVATE).edit()
+    editor.putString(key, Gson().toJson(value))
+    editor.apply()
+}
+
+fun <T> Context.getConfigList(key: String, type: Type): MutableList<T> {
+    val sp = this.getSharedPreferences(CONFIG, Context.MODE_PRIVATE)
+    val value = sp.getString(key, null)
+    return if (value == null) {
+        mutableListOf()
+    } else {
+        Gson().fromJson(sp.getString(key, ""), type)
+    }
 }
 //https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn
