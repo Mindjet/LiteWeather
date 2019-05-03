@@ -3,6 +3,8 @@ package io.github.mindjet.liteweather.view
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
+import android.support.v7.app.ActionBarDrawerToggle
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
@@ -10,6 +12,7 @@ import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_hack.*
 
 class MainActivity : BaseAppCompatActivity() {
 
@@ -18,9 +21,9 @@ class MainActivity : BaseAppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main_hack)
         initViewPager()
-        initFab()
+        initDrawerCoordinatorWidgets()
 
         //response to city add operation
         subscription = PubSub.getInstance().subscribe<Basic>(Constant.SIGNAL_ADD_CITY) {
@@ -32,6 +35,20 @@ class MainActivity : BaseAppCompatActivity() {
                 showToast(R.string.city_exist)
             }
         }
+    }
+
+    private fun initDrawerCoordinatorWidgets() {
+        //floating action button
+        initFab()
+        //toolbar
+        setSupportActionBar(toolbar)
+        //drawer toggle
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+//        navView.setNavigationItemSelectedListener(this)
     }
 
     private fun initViewPager() {
@@ -58,6 +75,14 @@ class MainActivity : BaseAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         subscription.unsubscribe()
+    }
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 
 }
