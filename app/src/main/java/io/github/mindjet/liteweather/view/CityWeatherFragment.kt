@@ -60,7 +60,7 @@ class CityWeatherFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         startLoading(rootView)
-        runDelay(600) {
+        runDelay(Constant.LOADING_MIN_SHOWN_TIME) {
             getCityWeather(rootView, this::successLoading, this::failLoading)
         }
     }

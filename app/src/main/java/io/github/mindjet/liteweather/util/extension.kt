@@ -1,7 +1,6 @@
 package io.github.mindjet.liteweather.util
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
@@ -12,8 +11,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import io.github.mindjet.liteweather.R
+import io.github.mindjet.liteweather.view.LoadingDialog
 import java.lang.reflect.Type
 
 const val CONFIG = "config"
@@ -73,12 +71,10 @@ fun Any.checkFalse(condition: Boolean?, job: () -> Unit) {
     }
 }
 
-fun Context.showLoadingDialog(): AlertDialog? {
-    return AlertDialog.Builder(this)
-        .setTitle(R.string.loading)
-        .setMessage(R.string.loading)
-        .setCancelable(true)
-        .show()
+fun Context.showLoadingDialog(): LoadingDialog? {
+    val dialog = LoadingDialog(this)
+    dialog.show()
+    return dialog
 }
 
 fun Context.showToast(contentId: Int) {
