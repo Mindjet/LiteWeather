@@ -3,8 +3,10 @@ package io.github.mindjet.liteweather.view
 import android.content.res.ColorStateList
 import android.os.Build
 import android.os.Bundle
+import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.view.MenuItem
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
@@ -14,7 +16,7 @@ import io.github.mindjet.liteweather.util.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_hack.*
 
-class MainActivity : BaseAppCompatActivity() {
+class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var subscription: PubSub.Subscription
     private lateinit var adapter: CityViewPagerAdapter
@@ -48,7 +50,8 @@ class MainActivity : BaseAppCompatActivity() {
         )
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-//        navView.setNavigationItemSelectedListener(this)
+        //navigation view
+        navView.setNavigationItemSelectedListener(this)
     }
 
     private fun initViewPager() {
@@ -85,4 +88,19 @@ class MainActivity : BaseAppCompatActivity() {
         }
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navCity -> {
+                showToast("City")
+            }
+            R.id.navConfig -> {
+                showToast("Config")
+            }
+            R.id.navAbout -> {
+                showToast("About")
+            }
+        }
+        drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
 }

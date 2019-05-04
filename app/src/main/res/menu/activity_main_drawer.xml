@@ -3,19 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/navCity"
-            android:icon="@drawable/ic_menu_city"
-            android:title="@string/menu_city" />
-        <item
-            android:id="@+id/navConfig"
-            android:icon="@drawable/ic_menu_config"
-            android:title="@string/menu_config" />
-        <item
-            android:id="@+id/navAbout"
-            android:icon="@drawable/ic_menu_about"
-            android:title="@string/menu_about" />
-    </group>
+    <item
+        android:id="@+id/navCity"
+        android:icon="@drawable/ic_menu_city"
+        android:title="@string/menu_city" />
+    <item
+        android:id="@+id/navConfig"
+        android:icon="@drawable/ic_menu_config"
+        android:title="@string/menu_config" />
+    <item
+        android:id="@+id/navAbout"
+        android:icon="@drawable/ic_menu_about"
+        android:title="@string/menu_about" />
 
 </menu>
