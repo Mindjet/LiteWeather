@@ -23,6 +23,8 @@ android {
         }
         release {
             minifyEnabled false
+            buildConfigField('String', 'ID', '"HE1708301747461865"')
+            buildConfigField('String', 'KEY', '"e0a0466db26d4efcb0cdb1f6719df1ae"')
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
