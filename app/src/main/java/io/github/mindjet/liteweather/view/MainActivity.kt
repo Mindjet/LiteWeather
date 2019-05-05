@@ -91,7 +91,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.navCity -> {
-                showToast("City")
+                goto(CityManagementActivity::class.java)
             }
             R.id.navConfig -> {
                 showToast("Config")
