@@ -6,6 +6,7 @@ import io.github.mindjet.liteweather.adapter.CommonAdapter
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.CityHelper
 import io.github.mindjet.liteweather.util.setVerticalLinear
+import kotlinx.android.synthetic.main.activity_city_management.*
 import kotlinx.android.synthetic.main.include_recycler_view.*
 import kotlinx.android.synthetic.main.item_city_management.view.*
 
@@ -16,7 +17,8 @@ class CityManagementActivity : BaseAppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_city_management)
-        supportActionBar?.title = "城市列表管理"
+
+        setSupportActionBar(toolbar)
 
         adapter = CommonAdapter(
             onItemBound = { model, vh, _ ->
@@ -31,6 +33,7 @@ class CityManagementActivity : BaseAppCompatActivity() {
         recyclerView.adapter = adapter
 
         adapter.addAll(CityHelper.getPinnedCities(this)!!)
+
     }
 
 }

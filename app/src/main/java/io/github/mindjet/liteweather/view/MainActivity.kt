@@ -67,10 +67,6 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private fun initFab() {
         fab.apply {
-            setImageResource(android.R.drawable.ic_input_add)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                imageTintList = ColorStateList.valueOf(resources.getColor(android.R.color.white))
-            }
             setOnClickListener { this@MainActivity goto CitySearchActivity::class.java }
         }
     }

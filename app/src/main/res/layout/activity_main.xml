@@ -32,7 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:src="@android:drawable/ic_input_add"
+        android:tint="@android:color/white" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
