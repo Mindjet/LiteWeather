@@ -8,14 +8,26 @@
     android:elevation="5dp"
     bind:targetApi="lollipop">
 
+    <ImageView
+        android:id="@+id/ivReorder"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/ic_reorder"
+        android:tint="#999"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/viewBg"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@drawable/bg_circle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/ivReorder"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
