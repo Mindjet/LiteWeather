@@ -25,4 +25,8 @@ object CityHelper {
         return true
     }
 
+    fun saveAll(ctx: Context?, cities: MutableList<City>) {
+        ctx?.saveConfigList(PINNED_CITIES, cities)
+    }
+
 }

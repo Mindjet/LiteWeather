@@ -8,6 +8,7 @@ import io.github.mindjet.liteweather.adapter.CommonAdapter
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.CityHelper
 import io.github.mindjet.liteweather.util.setVerticalLinear
+import io.github.mindjet.liteweather.util.showToast
 import io.github.mindjet.liteweather.util.turnTo
 import kotlinx.android.synthetic.main.activity_city_management.*
 import kotlinx.android.synthetic.main.include_recycler_view.*
@@ -25,7 +26,11 @@ class CityManagementActivity : BaseAppCompatActivity() {
         setContentView(R.layout.activity_city_management)
         setSupportActionBar(toolbar)
 
+        //toolbar navigation icon listener
+        toolbar.setNavigationOnClickListener { onBackPressed() }
 
+        //floating action button
+        fab.setOnClickListener(this::onFabClick)
 
         adapter = CommonAdapter(
             onItemBound = { model, vh, i ->
@@ -47,16 +52,24 @@ class CityManagementActivity : BaseAppCompatActivity() {
 
         //init checkStates, all true as they are chosen at the very first time
         checkStates = cities.map { true } as MutableList<Boolean>
+    }
 
-        //floating action button
-        fab.setOnClickListener {
-            inEditMode = !inEditMode
-            fab.setImageResource(if (inEditMode) R.drawable.ic_done else R.drawable.ic_edit)
-            adapter.notifyDataSetChanged()
-            if (!inEditMode) {
-                //TODO save states
-                checkStates.forEachIndexed { i, v -> Log.e("tag", "$i:$v") }
-            }
+    override fun onBackPressed() {
+        if (inEditMode) {
+            showToast("please exit edit mode and quit then.")
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun onFabClick(v: View) {
+        inEditMode = !inEditMode
+        fab.setImageResource(if (inEditMode) R.drawable.ic_done else R.drawable.ic_edit)
+        adapter.notifyDataSetChanged()
+        if (!inEditMode) {
+            checkStates.forEachIndexed { i, value -> Log.e("tag", "$i:$value") }
+            val cities = CityHelper.getPinnedCities(this)?.filterIndexed { i, _ -> checkStates[i] } as MutableList<City>
+            CityHelper.saveAll(v.context, cities)
         }
     }
 
