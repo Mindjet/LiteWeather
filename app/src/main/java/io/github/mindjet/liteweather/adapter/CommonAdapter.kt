@@ -59,6 +59,14 @@ class CommonAdapter<T>(
         }
     }
 
+    fun filter(condition: (t: T) -> Boolean) {
+        data = data.filter(condition) as MutableList<T>
+    }
+
+    fun filterIndexed(condition: (i: Int, t: T) -> Boolean) {
+        data = data.filterIndexed(condition) as MutableList<T>
+    }
+
     override val size: Int
         get() = itemCount
 

@@ -1,7 +1,5 @@
 package io.github.mindjet.liteweather.view
 
-import android.content.res.ColorStateList
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -18,7 +16,8 @@ import kotlinx.android.synthetic.main.activity_main_hack.*
 
 class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private lateinit var subscription: PubSub.Subscription
+    private lateinit var subscriptionAdd: PubSub.Subscription
+    private lateinit var subscriptionRefresh: PubSub.Subscription
     private lateinit var adapter: CityViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
         initDrawerCoordinatorWidgets()
 
         //response to city add operation
-        subscription = PubSub.getInstance().subscribe<Basic>(Constant.SIGNAL_ADD_CITY) {
+        subscriptionAdd = PubSub.getInstance().subscribe<Basic>(Constant.SIGNAL_ADD_CITY) {
             if (CityHelper.addCity(this, it)) {
                 adapter.addItem(City(it.location, it.cid))
                 killTopActivity()
@@ -37,6 +36,11 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
                 showToast(R.string.city_exist)
             }
         }
+
+        subscriptionRefresh = PubSub.getInstance()
+            .subscribe<MutableList<Boolean>>(Constant.SIGNAL_REFRESH_CITY) {
+                adapter.filterIndexed { i, _ -> it[i] }
+            }
     }
 
     private fun initDrawerCoordinatorWidgets() {
@@ -73,7 +77,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
 
     override fun onDestroy() {
         super.onDestroy()
-        subscription.unsubscribe()
+        subscriptionAdd.unsubscribe()
     }
 
     override fun onBackPressed() {

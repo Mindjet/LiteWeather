@@ -17,6 +17,11 @@ class CityViewPagerAdapter(context: Context, fm: FragmentManager) : FragmentPage
         notifyDataSetChanged()
     }
 
+    fun filterIndexed(condition: (i: Int, city: City) -> Boolean) {
+        pinnedCities = pinnedCities?.filterIndexed(condition) as MutableList<City>
+        notifyDataSetChanged()
+    }
+
     override fun getItem(index: Int): Fragment {
         return CityWeatherFragment.newInstance(pinnedCities?.get(index)?.name, pinnedCities?.get(index)?.code)
     }

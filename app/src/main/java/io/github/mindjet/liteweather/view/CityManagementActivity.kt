@@ -5,11 +5,9 @@ import android.util.Log
 import android.view.View
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CommonAdapter
+import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.model.City
-import io.github.mindjet.liteweather.util.CityHelper
-import io.github.mindjet.liteweather.util.setVerticalLinear
-import io.github.mindjet.liteweather.util.showToast
-import io.github.mindjet.liteweather.util.turnTo
+import io.github.mindjet.liteweather.util.*
 import kotlinx.android.synthetic.main.activity_city_management.*
 import kotlinx.android.synthetic.main.include_recycler_view.*
 import kotlinx.android.synthetic.main.item_city_management.view.*
@@ -70,6 +68,8 @@ class CityManagementActivity : BaseAppCompatActivity() {
             checkStates.forEachIndexed { i, value -> Log.e("tag", "$i:$value") }
             val cities = CityHelper.getPinnedCities(this)?.filterIndexed { i, _ -> checkStates[i] } as MutableList<City>
             CityHelper.saveAll(v.context, cities)
+            adapter.filterIndexed { i, _ -> checkStates[i] }
+            PubSub.getInstance().publish(Constant.SIGNAL_REFRESH_CITY, checkStates)
         }
     }
 
