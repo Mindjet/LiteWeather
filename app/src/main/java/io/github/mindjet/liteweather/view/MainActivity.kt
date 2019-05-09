@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.view.MenuItem
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
+import io.github.mindjet.liteweather.adapter.CityPagerAdapter
 import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
 import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.model.City
@@ -18,7 +19,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
 
     private lateinit var subscriptionAdd: PubSub.Subscription
     private lateinit var subscriptionRefresh: PubSub.Subscription
-    private lateinit var adapter: CityViewPagerAdapter
+    private lateinit var adapter: CityPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,8 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun initViewPager() {
-        adapter = CityViewPagerAdapter(this, supportFragmentManager)
+//        adapter = CityViewPagerAdapter(this, supportFragmentManager)
+        adapter = CityPagerAdapter(this)
         viewPager.adapter = adapter
         val white = resources.getColor(android.R.color.white)
         tabLayout.apply {
