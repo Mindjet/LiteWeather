@@ -8,7 +8,6 @@ import android.view.MenuItem
 import interfaces.heweather.com.interfacesmodule.bean.basic.Basic
 import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.adapter.CityPagerAdapter
-import io.github.mindjet.liteweather.adapter.CityViewPagerAdapter
 import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.*
