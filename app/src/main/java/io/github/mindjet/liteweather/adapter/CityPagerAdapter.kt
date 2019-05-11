@@ -47,7 +47,7 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
 
         val vm = CityWeatherVM(pinnedCities?.get(position)?.name)
         binding.vm = vm
-        vm.onBind(view)
+        vm.onBind(view, binding)
 
         binding.executePendingBindings()
         return view

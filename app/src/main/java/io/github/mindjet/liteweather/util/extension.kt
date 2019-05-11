@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
+import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
+import io.github.mindjet.liteweather.MyApplication
 import io.github.mindjet.liteweather.view.LoadingDialog
 import java.lang.reflect.Type
 
@@ -106,5 +108,9 @@ fun <T> Context.getConfigList(key: String, type: Type): MutableList<T> {
 
 fun RecyclerView.setVerticalLinear(ctx: Context) {
     this.layoutManager = LinearLayoutManager(ctx, RecyclerView.VERTICAL, false)
+}
+
+fun Any.getStringEx(@StringRes stringRes: Int, vararg formatVar: Any): String {
+    return MyApplication.getContext()?.getString(stringRes, formatVar)!!
 }
 //https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn

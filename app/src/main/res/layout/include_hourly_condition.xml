@@ -1,35 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="6dp"
-    app:cardElevation="5dp">
+<layout>
 
-    <FrameLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="io.github.mindjet.liteweather.view.CityWeatherVM" />
+    </data>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="5dp">
 
-        <include
-            android:id="@+id/includeLoadingHourly"
-            layout="@layout/include_loading"
-            bind:visibility="gone" />
-
-        <include
-            android:id="@+id/includeLoadFailedHourly"
-            layout="@layout/include_load_failed"
-            bind:visibility="gone" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:layout_height="wrap_content">
 
-    </FrameLayout>
+            <include
+                android:id="@+id/includeLoadingHourly"
+                layout="@layout/include_loading"
+                app:visible="@{vm.loading}"
+                bind:visibility="gone" />
 
-</android.support.v7.widget.CardView>
+            <include
+                android:id="@+id/includeLoadFailedHourly"
+                layout="@layout/include_load_failed"
+                app:visible="@{vm.loadFailed}"
+                bind:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </FrameLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>
 
 
