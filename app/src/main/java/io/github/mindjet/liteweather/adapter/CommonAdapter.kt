@@ -47,7 +47,7 @@ class CommonAdapter<T>(
         }
     }
 
-    fun addAll(t: Collection<T>, index: Int = -1, forceRefresh: Boolean = true) {
+    fun addAll(t: List<T>, index: Int = -1, forceRefresh: Boolean = true) {
         val oldSize = itemCount
         if (index == -1) {
             data.addAll(t)
@@ -65,6 +65,11 @@ class CommonAdapter<T>(
 
     fun filterIndexed(condition: (i: Int, t: T) -> Boolean) {
         data = data.filterIndexed(condition) as MutableList<T>
+    }
+
+    fun clear(forceRefresh: Boolean = true) {
+        data.clear()
+        if (forceRefresh) notifyDataSetChanged()
     }
 
     override val size: Int
