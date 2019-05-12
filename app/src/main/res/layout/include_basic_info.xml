@@ -22,7 +22,6 @@
             android:layout_height="wrap_content">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/clWrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/darker_gray"
@@ -98,13 +97,13 @@
             </android.support.constraint.ConstraintLayout>
 
             <include
-                android:id="@+id/includeLoadingBasicInfo"
+                android:id="@+id/includeLoading"
                 layout="@layout/include_loading"
                 app:visible="@{vm.loading}"
                 bind:visibility="gone" />
 
             <include
-                android:id="@+id/includeLoadFailedBasicInfo"
+                android:id="@+id/includeLoadFailed"
                 layout="@layout/include_load_failed"
                 app:visible="@{vm.loadFailed}"
                 bind:visibility="gone" />
