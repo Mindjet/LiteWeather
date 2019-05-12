@@ -7,7 +7,6 @@ import android.widget.ImageView
 
 @BindingAdapter("visible")
 fun View.setVisible(visible: Boolean) {
-    Log.e("sss", "setting view: $this")
     this.visibility = if (visible) View.VISIBLE else View.GONE
 }
 
@@ -17,7 +16,7 @@ fun View.setBackgroundRes(br: Int) {
 }
 
 @BindingAdapter("imgUrl")
-fun ImageView.setImageUrl(url: String) {
+fun ImageView.setImageUrl(url: String?) {
     Log.e("sss", "setting image :$this $url")
     this.load(url)  //already implemented in extension
 }

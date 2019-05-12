@@ -14,4 +14,6 @@ open class HaloOb<T>(default: T? = null) : ObservableField<T>() {
 
     class Int(default: kotlin.Int = 0) : HaloOb<kotlin.Int>(default)
 
+    class Bool(default: Boolean = false) : HaloOb<Boolean>(default)
+
 }

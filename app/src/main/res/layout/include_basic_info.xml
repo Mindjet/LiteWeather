@@ -34,6 +34,7 @@
                     android:layout_height="50dp"
                     android:layout_marginRight="10dp"
                     android:tint="#FFFFFF"
+                    app:imgUrl="@{vm.conditionIcon.get()}"
                     app:layout_constraintBottom_toBottomOf="@id/tvCondition"
                     app:layout_constraintRight_toLeftOf="@id/tvCondition"
                     app:layout_constraintTop_toTopOf="@id/tvCondition" />

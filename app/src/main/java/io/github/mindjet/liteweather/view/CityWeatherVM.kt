@@ -22,8 +22,8 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), SwipeRefr
 
     private var _binding: ViewDataBinding? = null
 
-    var loading: Boolean = true
-    var loadFailed: Boolean = false
+    var loading = HaloOb.Bool(true)
+    var loadFailed = HaloOb.Bool(false)
 
     var background = HaloOb.Int(R.color.condition_overcast)
 
@@ -59,7 +59,7 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), SwipeRefr
                     feelingTemperature.value = getStringEx(R.string.feeling_temperature_prefix, it.fl)
                     possibilityOfRain.value = getStringEx(R.string.possibility_of_rain, it.pcpn)
                     humidity.value = getStringEx(R.string.humidity, it.hum)
-//                    conditionIcon.value = "${Constant.CONDITION_ICON_URL_PREFIX}${it.cond_code}.png"
+                    conditionIcon.value = "${Constant.CONDITION_ICON_URL_PREFIX}${it.cond_code}.png"
                 },
                 {
                     //        view?.apply {
@@ -74,8 +74,8 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), SwipeRefr
 //        }
                 },
                 {
-                    loading = false
-                    loadFailed = false
+                    loading.value = false
+                    loadFailed.value = false
                 },
                 {
 
@@ -115,8 +115,8 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), SwipeRefr
 //            recyclerView turnTo View.GONE
 //            clWrapper turnTo View.GONE
 //        }
-        loading = true
-        loadFailed = false
+        loading.value = true
+        loadFailed.value = false
 
     }
 
