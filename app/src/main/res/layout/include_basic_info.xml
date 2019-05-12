@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="io.github.mindjet.liteweather.view.CityWeatherVM" />
+            type="io.github.mindjet.liteweather.vm.CityWeatherVM" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -26,7 +26,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/darker_gray"
-                android:padding="20dp">
+                android:padding="20dp"
+                app:backgroundResource="@{vm.background}">
 
                 <ImageView
                     android:id="@+id/ivCondition"

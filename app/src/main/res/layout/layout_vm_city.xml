@@ -6,7 +6,7 @@
 
         <variable
             name="vm"
-            type="io.github.mindjet.liteweather.view.CityWeatherVM" />
+            type="io.github.mindjet.liteweather.vm.CityWeatherVM" />
     </data>
 
     <FrameLayout
@@ -18,7 +18,8 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:onRefresh="@{vm::onRefresh}">
 
             <ScrollView
                 android:layout_width="match_parent"

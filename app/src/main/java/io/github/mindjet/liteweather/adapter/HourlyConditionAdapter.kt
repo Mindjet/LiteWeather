@@ -8,7 +8,7 @@ import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase
 import io.github.mindjet.liteweather.R
 
 class HourlyConditionAdapter(
-    private val data: List<HourlyBase>?,
+    private val data: List<HourlyBase>? = mutableListOf(),
     private val callback: View.(hourlyCondition: HourlyBase?) -> Unit
 ) :
     RecyclerView.Adapter<HourlyConditionAdapter.HourlyConditionVH>() {

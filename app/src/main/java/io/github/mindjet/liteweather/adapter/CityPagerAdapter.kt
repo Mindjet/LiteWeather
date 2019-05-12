@@ -10,7 +10,7 @@ import io.github.mindjet.liteweather.R
 import io.github.mindjet.liteweather.databinding.LayoutVmCityBinding
 import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.CityHelper
-import io.github.mindjet.liteweather.view.CityWeatherVM
+import io.github.mindjet.liteweather.vm.CityWeatherVM
 
 class CityPagerAdapter(val context: Context) : PagerAdapter() {
 
@@ -28,13 +28,6 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
         notifyDataSetChanged()
     }
 
-    fun forceUpdate() {
-//        pinnedCities?.clear()
-//        notifyDataSetChanged()
-//        pinnedCities = CityHelper.getPinnedCities(context)
-//        notifyDataSetChanged()
-    }
-
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val binding = DataBindingUtil.inflate<LayoutVmCityBinding>(
             LayoutInflater.from(context),
@@ -46,8 +39,12 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
         container.addView(view)
 
         val vm = CityWeatherVM(pinnedCities?.get(position)?.name)
-        binding.vm = vm
+
+        /*  ViewModel interfaces begin */
         vm.onBind(view, binding)
+        vm.initView(view)
+        vm.loadData(view)
+        /*  ViewModel interfaces end */
 
         binding.executePendingBindings()
         return view
