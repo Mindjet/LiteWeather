@@ -7,7 +7,7 @@ open class HaloOb<T>(default: T? = null) : ObservableField<T>() {
     var value: T? = default
         set(value) {
             field = value
-            this.set(value!!)
+            this.set(value)
         }
 
     class String(default: kotlin.String = "") : HaloOb<kotlin.String>(default)

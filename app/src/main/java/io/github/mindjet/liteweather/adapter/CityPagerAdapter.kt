@@ -2,6 +2,7 @@ package io.github.mindjet.liteweather.adapter
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.databinding.ViewDataBinding
 import android.support.v4.view.PagerAdapter
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import io.github.mindjet.liteweather.model.City
 import io.github.mindjet.liteweather.util.CityHelper
 import io.github.mindjet.liteweather.vm.CityWeatherVM
 
-class CityPagerAdapter(val context: Context) : PagerAdapter() {
+class CityPagerAdapter(private val context: Context) : PagerAdapter() {
 
     private var pinnedCities: MutableList<City>? = CityHelper.getPinnedCities(context)
 
@@ -29,14 +30,21 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val binding = DataBindingUtil.inflate<LayoutVmCityBinding>(
+        val onlyOne = pinnedCities?.size == 0 && position == 0
+
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(
             LayoutInflater.from(context),
-            R.layout.layout_vm_city,
+            if (onlyOne) R.layout.layout_guide else R.layout.layout_vm_city,
             container,
             false
         )
         val view = binding.root
         container.addView(view)
+
+        //if it' s the only one, which is the guideline page, no need to do viewmodel jobs
+        if (onlyOne) {
+            return view
+        }
 
         val vm = CityWeatherVM(pinnedCities?.get(position)?.name)
 
@@ -59,7 +67,11 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return pinnedCities?.get(position)?.name
+        return if (pinnedCities?.size == 0 && position == 0) {
+            context.resources.getString(R.string.welcome)
+        } else {
+            pinnedCities?.get(position)?.name
+        }
     }
 
     override fun isViewFromObject(p0: View, p1: Any): Boolean {
@@ -67,7 +79,7 @@ class CityPagerAdapter(val context: Context) : PagerAdapter() {
     }
 
     override fun getCount(): Int {
-        return pinnedCities?.size ?: 0
+        return if (pinnedCities?.size == 0) 1 else pinnedCities?.size ?: 0
     }
 
 }

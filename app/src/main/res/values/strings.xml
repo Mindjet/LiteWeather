@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">LiteWeather</string>
 
+    <string name="welcome">欢迎使用</string>
+    <string name="guideline">
+        <![CDATA[
+        <h2><font color="#008577">欢迎使用</font></h2>
+        <p>感谢您使用LiteWeather。</p>
+        <br />
+        <h2><font color="#008577">添加您关注的城市或地区</font></h2>
+        <p>点击右下角 + 按钮，搜索城市并添加首页吧！</p>]]>
+    </string>
+
     <string name="every_3_hour_condition">每3小时天气情况</string>
 
     <string name="degree_celsius_unit">%s℃</string>
