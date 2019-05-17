@@ -2,6 +2,7 @@ package io.github.mindjet.liteweather.vm
 
 import android.databinding.BaseObservable
 import android.databinding.ViewDataBinding
+import android.util.Log
 import android.view.View
 import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
@@ -12,13 +13,15 @@ import io.github.mindjet.liteweather.adapter.CommonVH
 import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.databinding.LayoutVmCityBinding
 import io.github.mindjet.liteweather.listener.ComListener
+import io.github.mindjet.liteweather.model.City
+import io.github.mindjet.liteweather.network.WeatherSrv
 import io.github.mindjet.liteweather.util.*
 import kotlinx.android.synthetic.main.item_hourly_condition.view.*
 
 /**
  * ViewModel for layout_vm_city
  */
-class CityWeatherVM(private val cityName: String?) : BaseObservable(), IViewModel {
+class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
 
     private lateinit var _binding: LayoutVmCityBinding
 
@@ -49,6 +52,9 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), IViewMode
     }
 
     override fun loadData(v: View?) {
+        WeatherSrv.getWeatherAll(city?.code) {
+            Log.e("sss", "${it.current.feelsLike.value}${it.current.feelsLike.unit}")
+        }
         onRefresh()
     }
 
@@ -70,7 +76,7 @@ class CityWeatherVM(private val cityName: String?) : BaseObservable(), IViewMode
 
     private fun getCityWeather() {
         HeWeather.getWeather(
-            MyApplication.getContext(), cityName, ComListener.wholeWeather(
+            MyApplication.getContext(), city?.name, ComListener.wholeWeather(
                 {
                     loadedOnce = true
                     background.value = it?.cond_code?.conditionColor()!!
