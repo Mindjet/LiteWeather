@@ -59,7 +59,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
     }
 
     private fun initViewPager() {
-//        adapter = CityViewPagerAdapter(this, supportFragmentManager)
+//        hourlyAdapter = CityViewPagerAdapter(this, supportFragmentManager)
         adapter = CityPagerAdapter(this)
         viewPager.adapter = adapter
         val white = resources.getColor(android.R.color.white)

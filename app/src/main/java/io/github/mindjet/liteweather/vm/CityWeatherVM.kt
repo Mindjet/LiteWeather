@@ -2,7 +2,6 @@ package io.github.mindjet.liteweather.vm
 
 import android.databinding.BaseObservable
 import android.databinding.ViewDataBinding
-import android.util.Log
 import android.view.View
 import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
@@ -14,8 +13,11 @@ import io.github.mindjet.liteweather.constant.Constant
 import io.github.mindjet.liteweather.databinding.LayoutVmCityBinding
 import io.github.mindjet.liteweather.listener.ComListener
 import io.github.mindjet.liteweather.model.City
+import io.github.mindjet.liteweather.model.DailyBase
+import io.github.mindjet.liteweather.model.FromTo
 import io.github.mindjet.liteweather.network.WeatherSrv
 import io.github.mindjet.liteweather.util.*
+import kotlinx.android.synthetic.main.item_daily_condition.view.*
 import kotlinx.android.synthetic.main.item_hourly_condition.view.*
 
 /**
@@ -40,7 +42,8 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
 
     var conditionIcon = HaloOb.String()
 
-    var adapter = CommonAdapter(onItemBound = this::onItemBound, layoutId = R.layout.item_hourly_condition)
+    var hourlyAdapter = CommonAdapter(onItemBound = this::onHourlyItemBound, layoutId = R.layout.item_hourly_condition)
+    var dailyAdapter = CommonAdapter(onItemBound = this::onDailyItemBound, layoutId = R.layout.item_hourly_condition)
 
     override fun onBind(v: View?, binding: ViewDataBinding) {
         _binding = binding as LayoutVmCityBinding
@@ -52,13 +55,10 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
     }
 
     override fun loadData(v: View?) {
-        WeatherSrv.getWeatherAll(city?.code) {
-            Log.e("sss", "${it.current.feelsLike.value}${it.current.feelsLike.unit}")
-        }
         onRefresh()
     }
 
-    private fun onItemBound(hourly: HourlyBase, vh: CommonVH, i: Int) {
+    private fun onHourlyItemBound(hourly: HourlyBase, vh: CommonVH, i: Int) {
         vh.itemView.apply {
             tvTemperatureItem.text = resources.getString(R.string.degree_celsius_unit, hourly.tmp)
             tvPossibilityRainyItem.text = "${hourly.pop}%"
@@ -67,14 +67,42 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
         }
     }
 
-    fun onRefresh() {
-        startLoading()
-        runDelay(Constant.LOADING_MIN_SHOWN_TIME) {
-            getCityWeather()
+    private fun onDailyItemBound(daily: DailyBase, vh: CommonVH, i: Int) {
+        vh.itemView.apply {
+            tvDate.text = daily.date
+            tvTemperatureFrom.text = daily.temperature.from
+            tvTemperatureTo.text = daily.temperature.to
         }
     }
 
-    private fun getCityWeather() {
+    fun onRefresh() {
+        startLoading()
+        runDelay(Constant.LOADING_MIN_SHOWN_TIME) {
+            getCityWeatherBasic()
+            getCityWeatherAll()
+        }
+    }
+
+    private fun getCityWeatherAll() {
+        WeatherSrv.getWeatherAll(city?.code) {
+            val size = it.forecastDaily.temperature.value.size
+            var i = 0
+            val dailyList = mutableListOf<DailyBase>()
+            while (i < size) {
+                var dateWithTime = it.forecastDaily.sunRiseSet.value[i].from.split("+")[0]
+                val date = dateWithTime.split("T")[0]
+                val sunRise = dateWithTime.split("T")[1]
+                dateWithTime = it.forecastDaily.sunRiseSet.value[i].to.split("+")[0]
+                val sunSet = dateWithTime.split("T")[1]
+                dailyList.add(DailyBase(date, it.forecastDaily.temperature.value[i], FromTo(sunRise, sunSet)))
+                i++
+            }
+            dailyAdapter.clear(false)
+            dailyAdapter.addAll(dailyList)
+        }
+    }
+
+    private fun getCityWeatherBasic() {
         HeWeather.getWeather(
             MyApplication.getContext(), city?.name, ComListener.wholeWeather(
                 {
@@ -88,7 +116,8 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
                     conditionIcon.value = "${Constant.CONDITION_ICON_URL_PREFIX}${it.cond_code}.png"
                 },
                 {
-                    adapter.addAll(it)
+                    hourlyAdapter.clear(false)
+                    hourlyAdapter.addAll(it)
                 },
                 {
                     loading.value = false

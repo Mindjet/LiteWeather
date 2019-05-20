@@ -12,6 +12,7 @@
     </string>
 
     <string name="every_3_hour_condition">每3小时天气情况</string>
+    <string name="upcoming_7_hour_condition">未来7日天气情况</string>
 
     <string name="degree_celsius_unit">%s℃</string>
     <string name="feeling_temperature_prefix">体感温度：%s℃</string>
