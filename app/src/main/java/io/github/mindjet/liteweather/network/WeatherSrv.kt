@@ -25,11 +25,14 @@ object WeatherSrv {
     private val UI: CoroutineContext = Dispatchers.Main
 
     fun getWeatherAll(cityId: String?, body: (all: WeatherAll) -> Unit): Job {
-        return GlobalScope.launch {
+        return GlobalScope.launch(Dispatchers.IO) {
             val url = "$URL_PREFIX&locationKey=weathercn%3A$cityId"
             val response = client?.newCall(url.toRequest())?.execute()
             val json = response?.body()?.string()
-            body.invoke(gson.fromJson(json, WeatherAll::class.java))
+
+            launch(Dispatchers.Main) {
+                body.invoke(gson.fromJson(json, WeatherAll::class.java))
+            }
         }
     }
 
