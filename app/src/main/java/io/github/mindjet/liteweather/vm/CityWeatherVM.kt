@@ -1,7 +1,10 @@
 package io.github.mindjet.liteweather.vm
 
+import android.content.Context
 import android.databinding.BaseObservable
 import android.databinding.ViewDataBinding
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase
 import interfaces.heweather.com.interfacesmodule.view.HeWeather
@@ -17,6 +20,7 @@ import io.github.mindjet.liteweather.model.DailyBase
 import io.github.mindjet.liteweather.model.FromTo
 import io.github.mindjet.liteweather.network.WeatherSrv
 import io.github.mindjet.liteweather.util.*
+import kotlinx.android.synthetic.main.include_daily_condition.view.*
 import kotlinx.android.synthetic.main.item_daily_condition.view.*
 import kotlinx.android.synthetic.main.item_hourly_condition.view.*
 
@@ -43,7 +47,7 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
     var conditionIcon = HaloOb.String()
 
     var hourlyAdapter = CommonAdapter(onItemBound = this::onHourlyItemBound, layoutId = R.layout.item_hourly_condition)
-    var dailyAdapter = CommonAdapter(onItemBound = this::onDailyItemBound, layoutId = R.layout.item_hourly_condition)
+    var dailyAdapter = CommonAdapter(onItemBound = this::onDailyItemBound, layoutId = R.layout.item_daily_condition)
 
     override fun onBind(v: View?, binding: ViewDataBinding) {
         _binding = binding as LayoutVmCityBinding
@@ -97,7 +101,7 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
                 dailyList.add(DailyBase(date, it.forecastDaily.temperature.value[i], FromTo(sunRise, sunSet)))
                 i++
             }
-            dailyAdapter.clear(false)
+            dailyAdapter.clear()
             dailyAdapter.addAll(dailyList)
         }
     }
@@ -116,7 +120,7 @@ class CityWeatherVM(private val city: City?) : BaseObservable(), IViewModel {
                     conditionIcon.value = "${Constant.CONDITION_ICON_URL_PREFIX}${it.cond_code}.png"
                 },
                 {
-                    hourlyAdapter.clear(false)
+                    hourlyAdapter.clear()
                     hourlyAdapter.addAll(it)
                 },
                 {

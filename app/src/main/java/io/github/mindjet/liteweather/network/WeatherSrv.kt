@@ -30,7 +30,7 @@ object WeatherSrv {
             val response = client?.newCall(url.toRequest())?.execute()
             val json = response?.body()?.string()
 
-            launch(Dispatchers.Main) {
+            launch(UI) {
                 body.invoke(gson.fromJson(json, WeatherAll::class.java))
             }
         }

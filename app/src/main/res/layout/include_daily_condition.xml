@@ -35,11 +35,13 @@
                 bind:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/dailyRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:adapter="@{vm.dailyAdapter}"
-                android:orientation="vertical" />
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
         </FrameLayout>
 

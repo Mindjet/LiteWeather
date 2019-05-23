@@ -8,7 +8,6 @@ import android.support.annotation.StringRes
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -112,8 +111,6 @@ fun RecyclerView.setVerticalLinear(ctx: Context) {
 }
 
 fun Any.getStringEx(@StringRes stringRes: Int, vararg formatVar: Any): String {
-    val string = MyApplication.getContext()?.resources?.getString(stringRes, *formatVar)!!
-    Log.e("sss", "string is $string")
-    return string
+    return MyApplication.getContext()?.resources?.getString(stringRes, *formatVar)!!
 }
 //https://weatherapi.market.xiaomi.com/wtr-v3/weather/all?latitude=110&longitude=112&locationKey=weathercn%3A101010100&days=15&appKey=weather20151024&sign=zUFJoAR2ZVrDy1vF3D07&appVersion=87&isGlobal=false&modDevice=&locale=zh_cn
