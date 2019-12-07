@@ -13,4 +13,8 @@
     <color name="condition_muggy">#BFBB7C</color>
 
     <color name="textColor">#313131</color>
+
+    <color name="titleColor">#CB000000</color>
+    <color name="contentColor">#80000000</color>
+    <color name="divider">#27000000</color>
 </resources>

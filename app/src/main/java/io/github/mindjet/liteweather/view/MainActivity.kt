@@ -98,7 +98,7 @@ class MainActivity : BaseAppCompatActivity(), NavigationView.OnNavigationItemSel
                 showToast("Config")
             }
             R.id.navAbout -> {
-                showToast("About")
+                goto(AboutActivity::class.java)
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)

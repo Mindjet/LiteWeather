@@ -29,6 +29,9 @@
         <activity
             android:name=".view.CityManagementActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.AboutActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

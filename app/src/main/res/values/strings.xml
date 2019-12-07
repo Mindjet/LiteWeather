@@ -33,4 +33,8 @@
     <string name="menu_city">城市列表管理</string>
     <string name="menu_config">配置请求参数</string>
     <string name="menu_about">关于</string>
+    <string name="app_version">应用版本</string>
+    <string name="service_agreement">服务条款</string>
+    <string name="feedback">问题反馈</string>
+    <string name="issue_welcome">欢迎到 Github 上提 issue</string>
 </resources>
